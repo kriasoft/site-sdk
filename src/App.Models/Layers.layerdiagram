@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="25650634-eb58-41e3-ace2-a230281efeb2" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <layers>
+    <layer Id="d808295e-9777-4b70-9e29-6937fd6891c7" name="Admin UI&#xD;&#xA;(App.Web.Admin)">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="14adcb28-0cba-41c4-9eb3-94569d5ec0ab" direction="Forward">
+          <layerMoniker Id="d4a8dd57-f9e4-443e-abaf-11a632837d83" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="be98fcb1-81d5-4f58-a4c1-d1338edb64b6" name="App.Web.Admin">
+          <ArtifactNode Label="App.Web.Admin" Category="CodeSchema_Project" Id="(Assembly=../App.Web.Admin/App.Web.Admin.csproj)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=App.Web.Admin)" Label="App.Web.Admin.dll" Category="CodeSchema_Assembly">
+            <LinkCategory Ref="Produces" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="bf50b6ab-2e0e-4e10-8eea-ccc9409e2d0d" name="Public UI&#xD;&#xA;(App.Web.Public)">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="e9b5a218-a18e-4bf8-bfc8-513140270c08" direction="Forward">
+          <layerMoniker Id="d4a8dd57-f9e4-443e-abaf-11a632837d83" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+    </layer>
+    <layer Id="d4a8dd57-f9e4-443e-abaf-11a632837d83" name="Core Library&#xD;&#xA;(App.Core)">
+      <childLayers>
+        <layer Id="1edcce2d-25d1-4991-83b1-dfbfb88140e7" name="Data&#xD;&#xA;(Entity Framework)" />
+        <layer Id="9669eb34-078a-48b9-bb35-da76cd2b40d6" name="Services">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="376f12c1-8601-4c21-ab4a-97afeb026cae" direction="Forward">
+              <layerMoniker Id="1edcce2d-25d1-4991-83b1-dfbfb88140e7" />
+            </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="77ae48c5-5fb4-4cd7-bb3a-162f4c46e23c" direction="Forward">
+              <layerMoniker Id="8b495702-68aa-4e1f-8ec5-42b444adb25a" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+        </layer>
+        <layer Id="8b495702-68aa-4e1f-8ec5-42b444adb25a" name="Activities&#xD;&#xA;(Worflow Foundation)" />
+      </childLayers>
+      <references>
+        <reference Id="f1775c9a-41d6-49b6-8f52-a00d88421889" name="App.Core">
+          <ArtifactNode Label="App.Core" Category="CodeSchema_Project" Id="(Assembly=../App.Core/App.Core.csproj)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=App.Core)" Label="App.Core.dll" Category="CodeSchema_Assembly">
+            <LinkCategory Ref="Produces" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+  </layers>
+</layerModel>
