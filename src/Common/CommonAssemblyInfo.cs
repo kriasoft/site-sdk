@@ -4,17 +4,29 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
 using System.Reflection;
+using System.Resources;
+using System.Runtime.InteropServices;
 
-// Common Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-[assembly: AssemblyConfiguration("")]
+// Common information about an assembly is controlled through the following set of attributes.
+// Change these attribute values to modify the information associated with an assembly.
 [assembly: AssemblyCompany("KriaSoft LLC")]
 [assembly: AssemblyProduct("Web Application Starter Kit")]
 [assembly: AssemblyCopyright("Copyright © 2012 KriaSoft LLC")]
+[assembly: AssemblyConfiguration("")]
 [assembly: AssemblyTrademark("")]
+
+[assembly: ComVisible(false)]
+[assembly: CLSCompliant(true)]
+
 [assembly: AssemblyCulture("")]
+[assembly: NeutralResourcesLanguage("en-US")]
+
+// ============================================================================
+//  DO NOT EDIT OR REMOVE ANYTHING BELOW THIS COMMENT.
+//  Version numbers are automatically generated based on regular expressions.
+// ============================================================================
 
 // Version information for an assembly consists of the following four values:
 //

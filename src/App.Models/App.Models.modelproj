@@ -40,10 +40,4 @@
       <DependentUpon>Layers.layerdiagram</DependentUpon>
     </Validate>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\App.Web.Admin\App.Web.Admin.csproj">
-      <Name>App.Web.Admin</Name>
-      <Project>{43d9aa78-0079-49e5-8c24-de1efc45bcfe}</Project>
-    </ProjectReference>
-  </ItemGroup>
 </Project>
