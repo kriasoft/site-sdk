@@ -83,7 +83,7 @@
     <Build Include="Security\System.sql" />
     <Build Include="Security\Membership.sql" />
     <Build Include="Membership\Tables\RegisteredUser.sql" />
-    <None Include="Scripts\ReferenceData.UserRoles.sql" />
+    <None Include="Scripts\ReferenceData.UserRole.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\PostDeployment.sql" />
