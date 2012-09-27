@@ -63,6 +63,7 @@
     <Folder Include="Database Triggers\" />
     <Folder Include="dbo\User Defined Types\" />
     <Folder Include="Security\" />
+    <Folder Include="Scripts" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\ErrorLog.sql" />
@@ -82,5 +83,12 @@
     <Build Include="Security\System.sql" />
     <Build Include="Security\Membership.sql" />
     <Build Include="Membership\Tables\RegisteredUser.sql" />
+    <None Include="Scripts\ReferenceData.UserRoles.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Scripts\PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Database.publish.xml" />
   </ItemGroup>
 </Project>
