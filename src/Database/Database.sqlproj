@@ -65,6 +65,7 @@
     <Folder Include="dbo\User Defined Types\" />
     <Folder Include="Security\" />
     <Folder Include="Scripts" />
+    <Folder Include="ReferenceData" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\ErrorLog.sql" />
@@ -84,12 +85,17 @@
     <Build Include="Security\System.sql" />
     <Build Include="Security\Membership.sql" />
     <Build Include="Membership\Tables\RegisteredUser.sql" />
-    <None Include="Scripts\ReferenceData.UserRole.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Database.publish.xml" />
+    <None Include="ReferenceData\UserRole.csv" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\PostDeployment.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Database.publish.xml" />
+    <SqlCmdVariable Include="ReferenceDataDir">
+      <DefaultValue>$(ProjectDir)ReferenceData\</DefaultValue>
+    </SqlCmdVariable>
   </ItemGroup>
 </Project>
