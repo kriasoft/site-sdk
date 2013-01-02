@@ -23,9 +23,12 @@ namespace App.Web.Public
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
+            bundles.Add(new ScriptBundle("~/bundles/site").Include(
+                        "~/Scripts/Site.js"));
 
-            bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
+            bundles.Add(new StyleBundle("~/content/css").Include("~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",
                         "~/Content/themes/base/jquery.ui.resizable.css",
                         "~/Content/themes/base/jquery.ui.selectable.css",
