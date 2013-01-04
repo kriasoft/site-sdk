@@ -4,7 +4,7 @@
     <Sites>
       <Site name="Web">
         <Bindings>
-          <Binding name="HttpEndpointBinding" endpointName="HttpEndpoint" />
+          <Binding name="HttpBinding" endpointName="HttpEndpoint" />
         </Bindings>
       </Site>
     </Sites>
@@ -14,5 +14,21 @@
     <Imports>
       <Import moduleName="Diagnostics" />
     </Imports>
+    <Startup>
+      <Task commandLine="Startup.cmd >> &quot;%TEMP%\StartupLog.txt&quot; 2>&amp;1" executionContext="elevated" taskType="simple">
+        <Environment>
+
+          <!-- Create the environment variable that informs the startup task whether it is running 
+               in the Compute Emulator or in the cloud. "%ComputeEmulatorRunning%" == "true" when 
+               running in the Compute Emulator, "%ComputeEmulatorRunning%" == "false" when running 
+               in the cloud. -->
+
+          <Variable name="ComputeEmulatorRunning">
+            <RoleInstanceValue xpath="/RoleEnvironment/Deployment/@emulated" />
+          </Variable>
+
+        </Environment>
+      </Task>
+    </Startup>
   </WebRole>
 </ServiceDefinition>
