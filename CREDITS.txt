@@ -1,0 +1,64 @@
+Copyright (c) 2012-2013 Konstantin Tarkus, http://sitesdk.com
+
+This software is released under the Apache License 2.0 (the "License"); 
+you may not use the software except in compliance with the License. You 
+can find a copy of the License in the file LICENSE.txt accompanying this 
+file. 
+
+This software includes or is derivative of works distributed under the 
+licenses listed below. The full text for most of the licenses listed below 
+can be found in the LICENSE.txt file accompanying each work. The original 
+copyright notices have been preserved within the respective files and or 
+packages. Please refer to the specific files and/or packages for more 
+detailed information about the authors, copyright notices, and licenses.
+
+
+ASP.NET MVC
+-----
+Website:      http://aspnet.codeplex.com/wikipage?title=MVC&referringTitle=Home
+Copyright:    Copyright (c) 2008-2011 Microsoft Corporation
+License:      MICROSOFT ASP.NET MODEL VIEW CONTROLLER 3 EULA
+              http://go.microsoft.com/fwlink/?LinkID=207621
+
+Json.NET
+-----
+Website:      http://json.codeplex.com/
+Copyright:    Copyright (c) 2007 James Newton-King
+License:      The MIT License (MIT)
+
+Autofac
+-----
+Website:      http://code.google.com/p/autofac/
+Copyright:    Copyright (c) 2007-2008 Autofac Contributors
+              http://code.google.com/p/autofac/wiki/Contributing
+License:      The MIT License (MIT)
+
+AngularJS
+-----
+Website:      http://angularjs.org/
+Copyright:    Copyright (c) 2010-2012 Google, Inc. http://angularjs.org
+License:      The MIT License (MIT)
+
+jQuery
+-----
+Website:      http://jquery.com
+Copyright:    Copyright (c) 2010 John Resig, http://jquery.com
+License:      The MIT License (MIT)
+
+Log4Net
+-----
+Website:      http://logging.apache.org/log4net/index.html
+Copyright:    Copyright (c) 2007 Apache Software Foundation
+License:      Apache Software Foundation License 2.0
+
+Moq
+-----
+Website:      http://code.google.com/p/moq/
+Copyright:    Copyright (c) 2007. Clarius Consulting, Manas Technology Solutions, InSTEDD
+License:      New BSD
+
+NuGet
+-----
+Website:      http://nuget.codeplex.com
+Copyright:    Copyright 2010-2011 Outercurve Foundation
+License:      Apache Software Foundation License 2.0
