@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="CommonAssemblyInfo.cs" company="KriaSoft LLC">
-//   Copyright © 2012 Konstantin Tarkus, KriaSoft LLC. See LICENSE.txt
+//   Copyright © 2013 Konstantin Tarkus, KriaSoft LLC. See LICENSE.txt
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -13,7 +13,7 @@ using System.Runtime.InteropServices;
 // Change these attribute values to modify the information associated with an assembly.
 [assembly: AssemblyCompany("KriaSoft LLC")]
 [assembly: AssemblyProduct("Web Application Starter Kit")]
-[assembly: AssemblyCopyright("Copyright © 2012 KriaSoft LLC")]
+[assembly: AssemblyCopyright("Copyright © 2013 KriaSoft LLC")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyTrademark("")]
 

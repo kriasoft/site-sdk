@@ -1,23 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Core", "App.Core\App.Core.csproj", "{04EE113A-3B24-4B8D-A529-DC2D57A2F8BD}"
-EndProject
-Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "App.Models", "App.Models\App.Models.modelproj", "{7FB43C39-126A-4C5B-8D78-34DFB7759CF0}"
-EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "Database\Database.sqlproj", "{320DA8D7-15E6-444F-A648-045CB0FDA9EE}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BB9B6BF6-07D3-4B67-8954-595619697E4F}"
-	ProjectSection(SolutionItems) = preProject
-		Common\CommonAssemblyInfo.cs = Common\CommonAssemblyInfo.cs
-		..\LICENSE.txt = ..\LICENSE.txt
-		..\README.md = ..\README.md
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{49F41DCB-8780-42D1-B105-4F42DCB7AFE6}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6C7231C5-C010-45DF-9FF5-8EC3DA0D6809}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{294451A2-F1EB-40D3-B370-2C90935A02AA}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
@@ -27,11 +10,29 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{294451
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Architecture", "Architecture", "{8887D32A-9206-4498-AA21-4013917651BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Web.Public", "App.Web.Public\App.Web.Public.csproj", "{51F14CEF-E4BC-4DB7-9804-307DDEAF6B93}"
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "Models", "Models\Models.modelproj", "{7FB43C39-126A-4C5B-8D78-34DFB7759CF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Web.Public.Tests", "App.Web.Public.Tests\App.Web.Public.Tests.csproj", "{94C9F1DA-C194-4A6C-8B6D-8D9FB7E66131}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BB9B6BF6-07D3-4B67-8954-595619697E4F}"
+	ProjectSection(SolutionItems) = preProject
+		Common\CommonAssemblyInfo.cs = Common\CommonAssemblyInfo.cs
+		..\LICENSE.txt = ..\LICENSE.txt
+		..\README.md = ..\README.md
+		Settings.StyleCop = Settings.StyleCop
+	EndProjectSection
 EndProject
-Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "App.Cloud", "App.Cloud\App.Cloud.ccproj", "{CBF89FF4-8072-4CFB-B433-D5B626D2012C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{49F41DCB-8780-42D1-B105-4F42DCB7AFE6}"
+EndProject
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "Cloud", "Cloud\Cloud.ccproj", "{CBF89FF4-8072-4CFB-B433-D5B626D2012C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{04EE113A-3B24-4B8D-A529-DC2D57A2F8BD}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "Database\Database.sqlproj", "{320DA8D7-15E6-444F-A648-045CB0FDA9EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{51F14CEF-E4BC-4DB7-9804-307DDEAF6B93}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6C7231C5-C010-45DF-9FF5-8EC3DA0D6809}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.UnitTests", "..\Tests\Web.UnitTests\Web.UnitTests.csproj", "{94C9F1DA-C194-4A6C-8B6D-8D9FB7E66131}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,14 +40,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{04EE113A-3B24-4B8D-A529-DC2D57A2F8BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{04EE113A-3B24-4B8D-A529-DC2D57A2F8BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{04EE113A-3B24-4B8D-A529-DC2D57A2F8BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{04EE113A-3B24-4B8D-A529-DC2D57A2F8BD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7FB43C39-126A-4C5B-8D78-34DFB7759CF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7FB43C39-126A-4C5B-8D78-34DFB7759CF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FB43C39-126A-4C5B-8D78-34DFB7759CF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FB43C39-126A-4C5B-8D78-34DFB7759CF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBF89FF4-8072-4CFB-B433-D5B626D2012C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBF89FF4-8072-4CFB-B433-D5B626D2012C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBF89FF4-8072-4CFB-B433-D5B626D2012C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBF89FF4-8072-4CFB-B433-D5B626D2012C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04EE113A-3B24-4B8D-A529-DC2D57A2F8BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04EE113A-3B24-4B8D-A529-DC2D57A2F8BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04EE113A-3B24-4B8D-A529-DC2D57A2F8BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04EE113A-3B24-4B8D-A529-DC2D57A2F8BD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{320DA8D7-15E6-444F-A648-045CB0FDA9EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{320DA8D7-15E6-444F-A648-045CB0FDA9EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{320DA8D7-15E6-444F-A648-045CB0FDA9EE}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
@@ -61,20 +66,16 @@ Global
 		{94C9F1DA-C194-4A6C-8B6D-8D9FB7E66131}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94C9F1DA-C194-4A6C-8B6D-8D9FB7E66131}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94C9F1DA-C194-4A6C-8B6D-8D9FB7E66131}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CBF89FF4-8072-4CFB-B433-D5B626D2012C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CBF89FF4-8072-4CFB-B433-D5B626D2012C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CBF89FF4-8072-4CFB-B433-D5B626D2012C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CBF89FF4-8072-4CFB-B433-D5B626D2012C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{320DA8D7-15E6-444F-A648-045CB0FDA9EE} = {49F41DCB-8780-42D1-B105-4F42DCB7AFE6}
-		{04EE113A-3B24-4B8D-A529-DC2D57A2F8BD} = {49F41DCB-8780-42D1-B105-4F42DCB7AFE6}
-		{51F14CEF-E4BC-4DB7-9804-307DDEAF6B93} = {49F41DCB-8780-42D1-B105-4F42DCB7AFE6}
-		{CBF89FF4-8072-4CFB-B433-D5B626D2012C} = {49F41DCB-8780-42D1-B105-4F42DCB7AFE6}
 		{7FB43C39-126A-4C5B-8D78-34DFB7759CF0} = {8887D32A-9206-4498-AA21-4013917651BB}
+		{CBF89FF4-8072-4CFB-B433-D5B626D2012C} = {49F41DCB-8780-42D1-B105-4F42DCB7AFE6}
+		{04EE113A-3B24-4B8D-A529-DC2D57A2F8BD} = {49F41DCB-8780-42D1-B105-4F42DCB7AFE6}
+		{320DA8D7-15E6-444F-A648-045CB0FDA9EE} = {49F41DCB-8780-42D1-B105-4F42DCB7AFE6}
+		{51F14CEF-E4BC-4DB7-9804-307DDEAF6B93} = {49F41DCB-8780-42D1-B105-4F42DCB7AFE6}
 		{94C9F1DA-C194-4A6C-8B6D-8D9FB7E66131} = {6C7231C5-C010-45DF-9FF5-8EC3DA0D6809}
 	EndGlobalSection
 EndGlobal
