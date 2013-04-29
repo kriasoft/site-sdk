@@ -1,4 +1,4 @@
-# SiteSDK - Web Application Starter Kit for .NET developers
+# Web Application Starter Kit for .NET developers
 
 This a solution (project) template of a typical web application built on top of the following technologies:
 
@@ -16,6 +16,8 @@ It is supposed to be uased as a base repo for your apps from which you can pull 
 You can use it to bootstrap your web app projects and dev environment for these projects.
 
 The starter kit contains multi-project solution structure, a set of 3rd party libraries, tools and a bounch of scripts all preconfigured for instant web development gratification. Just clone the repo, open ```Source/Application.sln``` and you are ready to develop and test your application.
+
+![Solution](http://i.imgur.com/mGy9OWv.png)
 
 ### Getting Started
 
