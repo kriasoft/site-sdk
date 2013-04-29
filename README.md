@@ -2,7 +2,7 @@
 
 This a solution (project) template of a typical web application built on top of the following technologies:
 
- - ASP.NET MVC 4, ASP.NET MVC WebAPI, ASP.NET Web Pages (Razor)
+ - [ASP.NET MVC 4](http://www.asp.net/mvc/mvc4), [ASP.NET Web API](http://www.asp.net/web-api), [ASP.NET Web Pages](http://www.asp.net/web-pages) (Razor)
  - SQL Server Database Project with [SSDT](http://msdn.microsoft.com/en-us/data/tools.aspx)
  - [Entity Framework](http://msdn.microsoft.com/en-us/data/ef.aspx) 5 with [Database First](http://msdn.microsoft.com/en-us/data/jj206878.aspx)
  - Real-time web functionality with [SignalR](http://www.asp.net/signalr)
