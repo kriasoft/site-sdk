@@ -4,7 +4,7 @@
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseName>WebApp</TargetDatabaseName>
     <DeployScriptFileName>Database.sql</DeployScriptFileName>
-    <TargetConnectionString>Data Source=(LocalDB)\Projects;Integrated Security=True;Pooling=False</TargetConnectionString>
+    <TargetConnectionString>Data Source=(LocalDb)\v11.0;Integrated Security=True;Pooling=False</TargetConnectionString>
     <ProfileVersionNumber>1</ProfileVersionNumber>
     <BlockWhenDriftDetected>False</BlockWhenDriftDetected>
     <RegisterDataTierApplication>False</RegisterDataTierApplication>
