@@ -72,8 +72,6 @@
     <Build Include="dbo\Tables\DatabaseLog.sql" />
     <Build Include="Membership\Tables\UserUserRole.sql" />
     <Build Include="Membership\Tables\User.sql" />
-    <Build Include="Membership\Tables\Credential.sql" />
-    <Build Include="Membership\Tables\CredentialType.sql" />
     <Build Include="Membership\Tables\UserRole.sql" />
     <Build Include="dbo\Stored Procedures\uspPrintError.sql" />
     <Build Include="dbo\Stored Procedures\uspLogError.sql" />
@@ -84,7 +82,9 @@
     <Build Include="dbo\User Defined Types\Email.sql" />
     <Build Include="Security\System.sql" />
     <Build Include="Security\Membership.sql" />
-    <Build Include="Membership\Tables\RegisteredUser.sql" />
+    <Build Include="Membership\Tables\AnonymousUser.sql" />
+    <Build Include="Membership\Tables\UserOpenAuthAccount.sql" />
+    <Build Include="Membership\Tables\Profile.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Database.publish.xml" />
