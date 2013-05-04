@@ -8,103 +8,112 @@ namespace App.Web.Controllers
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Transactions;
     using System.Web.Mvc;
     using System.Web.Security;
 
-    using App.Web.Filters;
+    using App.Security;
+    using App.Services;
     using App.Web.Models;
 
-    using DotNetOpenAuth.AspNet;
+    using Microsoft.AspNet.Membership.OpenAuth;
     using Microsoft.Web.WebPages.OAuth;
+
     using WebMatrix.WebData;
 
     [Authorize]
-    [InitializeSimpleMembership]
     public class AccountController : Controller
     {
-        //
-        // GET: /Account/Login
+        private readonly IMembershipService membership;
 
-        [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
+        public AccountController(IMembershipService membershipService)
         {
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
+            this.membership = membershipService;
         }
 
-        //
-        // POST: /Account/Login
-
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginModel model, string returnUrl)
+        public enum ManageMessageId
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+            ChangePasswordSuccess,
+            SetPasswordSuccess,
+            RemoveLoginSuccess,
+        }
+
+        //// GET: /login
+
+        [AllowAnonymous]
+        public ActionResult LogIn(string returnUrl)
+        {
+            this.ViewBag.ReturnUrl = returnUrl;
+            return this.View();
+        }
+
+        //// POST: /login
+
+        [HttpPost, AllowAnonymous, ValidateAntiForgeryToken]
+        public ActionResult LogIn(LoginModel model, string returnUrl)
+        {
+            if (this.ModelState.IsValid)
             {
-                return RedirectToLocal(returnUrl);
+                try
+                {
+                    this.membership.ValidateUser(model.UserName, model.Password);
+                    FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+                    return this.RedirectToLocal(returnUrl);
+                }
+                catch (ApplicationException ex)
+                {
+                    this.ModelState.AddModelError(string.Empty, ex.Message);
+                }
             }
 
             // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("", "The user name or password provided is incorrect.");
-            return View(model);
+            return this.View(model);
         }
 
-        //
-        // POST: /Account/LogOff
+        //// POST: /logout
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult LogOff()
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult LogOut()
         {
-            WebSecurity.Logout();
-
-            return RedirectToAction("Index", "Home");
+            FormsAuthentication.SignOut();
+            return this.RedirectToAction("Index", "Home");
         }
 
-        //
-        // GET: /Account/Register
+        //// GET: /register
 
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            return this.View();
         }
 
-        //
-        // POST: /Account/Register
+        //// POST: /register
 
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+        [HttpPost, AllowAnonymous, ValidateAntiForgeryToken]
         public ActionResult Register(RegisterModel model)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
                 // Attempt to register the user
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
-                    WebSecurity.Login(model.UserName, model.Password);
-                    return RedirectToAction("Index", "Home");
+                    var user = this.membership.CreateUser(model.UserName, model.Email, model.Password);
+                    FormsAuthentication.SetAuthCookie(user.UserName, true);
+                    return this.RedirectToAction("Index", "Home");
                 }
-                catch (MembershipCreateUserException e)
+                catch (ApplicationException ex)
                 {
-                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                    this.ModelState.AddModelError(string.Empty, ex.Message);
                 }
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return this.View(model);
         }
 
-        //
-        // POST: /Account/Disassociate
+        //// POST: /account/disassociate
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Disassociate(string provider, string providerUserId)
         {
             string ownerAccount = OAuthWebSecurity.GetUserName(provider, providerUserId);
@@ -126,11 +135,10 @@ namespace App.Web.Controllers
                 }
             }
 
-            return RedirectToAction("Manage", new { Message = message });
+            return this.RedirectToAction("Manage", new { Message = message });
         }
 
-        //
-        // GET: /Account/Manage
+        //// GET: /account/manage
 
         public ActionResult Manage(ManageMessageId? message)
         {
@@ -138,17 +146,15 @@ namespace App.Web.Controllers
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
                 : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
-                : "";
+                : string.Empty;
             ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             ViewBag.ReturnUrl = Url.Action("Manage");
-            return View();
+            return this.View();
         }
 
-        //
-        // POST: /Account/Manage
+        //// POST: /account/manage
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Manage(LocalPasswordModel model)
         {
             bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
@@ -171,11 +177,11 @@ namespace App.Web.Controllers
 
                     if (changePasswordSucceeded)
                     {
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
+                        return this.RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
                     }
                     else
                     {
-                        ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
+                        ModelState.AddModelError(string.Empty, "The current password is incorrect or the new password is invalid.");
                     }
                 }
             }
@@ -194,124 +200,118 @@ namespace App.Web.Controllers
                     try
                     {
                         WebSecurity.CreateAccount(User.Identity.Name, model.NewPassword);
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
+                        return this.RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
                     }
                     catch (Exception)
                     {
-                        ModelState.AddModelError("", String.Format("Unable to create local account. An account with the name \"{0}\" may already exist.", User.Identity.Name));
+                        this.ModelState.AddModelError(string.Empty, string.Format("Unable to create local account. An account with the name \"{0}\" may already exist.", User.Identity.Name));
                     }
                 }
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return this.View(model);
         }
 
-        //
-        // POST: /Account/ExternalLogin
+        //// POST: /Account/ExternalLogin
 
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+        [HttpPost, AllowAnonymous, ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
             return new ExternalLoginResult(provider, Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
         }
 
-        //
-        // GET: /Account/ExternalLoginCallback
+        //// GET: /Account/ExternalLoginCallback
 
         [AllowAnonymous]
         public ActionResult ExternalLoginCallback(string returnUrl)
         {
-            AuthenticationResult result = OAuthWebSecurity.VerifyAuthentication(Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
+            var result = OpenAuth.VerifyAuthentication(Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
+
             if (!result.IsSuccessful)
             {
-                return RedirectToAction("ExternalLoginFailure");
+                return this.RedirectToAction("ExternalLoginFailure");
             }
 
-            if (OAuthWebSecurity.Login(result.Provider, result.ProviderUserId, createPersistentCookie: false))
+            if (OpenAuth.Login(result.Provider, result.ProviderUserId, createPersistentCookie: false))
             {
-                return RedirectToLocal(returnUrl);
+                return this.RedirectToLocal(returnUrl);
             }
 
             if (User.Identity.IsAuthenticated)
             {
                 // If the current user is logged in add the new account
-                OAuthWebSecurity.CreateOrUpdateAccount(result.Provider, result.ProviderUserId, User.Identity.Name);
-                return RedirectToLocal(returnUrl);
+                OpenAuth.AddAccountToExistingUser(result.Provider, result.ProviderUserId, result.UserName, User.Identity.Name);
+                return this.RedirectToLocal(returnUrl);
             }
             else
             {
                 // User is new, ask for their desired membership name
-                string loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
-                ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
+                var loginData = CryptoUtility.Serialize("oauth", result.Provider, result.ProviderUserId, result.UserName);
+                ViewBag.ProviderDisplayName = OpenAuth.GetProviderDisplayName(result.Provider);
                 ViewBag.ReturnUrl = returnUrl;
-                return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = result.UserName, ExternalLoginData = loginData });
+
+                return this.View(
+                    "ExternalLoginConfirmation",
+                    new RegisterExternalLoginModel
+                    {
+                        UserName = result.UserName.Contains("@") ? result.UserName.Substring(0, result.UserName.IndexOf("@")) : result.UserName,
+                        Email = result.UserName.Contains("@") ? result.UserName : string.Empty,
+                        ExternalLoginData = loginData
+                    });
             }
         }
 
-        //
-        // POST: /Account/ExternalLoginConfirmation
+        //// POST: /Account/ExternalLoginConfirmation
 
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+        [HttpPost, AllowAnonymous, ValidateAntiForgeryToken]
         public ActionResult ExternalLoginConfirmation(RegisterExternalLoginModel model, string returnUrl)
         {
-            string provider = null;
-            string providerUserId = null;
+            string[] loginData;
 
-            if (User.Identity.IsAuthenticated || !OAuthWebSecurity.TryDeserializeProviderUserId(model.ExternalLoginData, out provider, out providerUserId))
+            if (User.Identity.IsAuthenticated || (loginData = CryptoUtility.TryDeserialize("oauth", model.ExternalLoginData)) == null)
             {
-                return RedirectToAction("Manage");
+                return this.RedirectToAction("Manage");
             }
+
+            string provider = loginData[0];
+            string providerUserId = loginData[1];
+            string providerUserName = loginData[2];
 
             if (ModelState.IsValid)
             {
-                // Insert a new user into the database
-                using (UsersContext db = new UsersContext())
+                try
                 {
-                    UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
-                    // Check if user already exists
-                    if (user == null)
-                    {
-                        // Insert name into the profile table
-                        db.UserProfiles.Add(new UserProfile { UserName = model.UserName });
-                        db.SaveChanges();
+                    var user = this.membership.CreateUser(model.UserName, model.Email, Membership.GeneratePassword(8, 0));
+                    OpenAuth.CreateUser(provider, providerUserId, providerUserName, user.UserName);
+                    FormsAuthentication.SetAuthCookie(user.UserName, createPersistentCookie: false);
 
-                        OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);
-                        OAuthWebSecurity.Login(provider, providerUserId, createPersistentCookie: false);
-
-                        return RedirectToLocal(returnUrl);
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("UserName", "User name already exists. Please enter a different user name.");
-                    }
+                    return this.RedirectToLocal(returnUrl);
+                }
+                catch (ApplicationException ex)
+                {
+                    this.ModelState.AddModelError(string.Empty, ex.Message);
                 }
             }
 
-            ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(provider).DisplayName;
+            ViewBag.ProviderDisplayName = OpenAuth.GetProviderDisplayName(provider);
             ViewBag.ReturnUrl = returnUrl;
-            return View(model);
+            return this.View(model);
         }
 
-        //
-        // GET: /Account/ExternalLoginFailure
+        //// GET: /Account/ExternalLoginFailure
 
         [AllowAnonymous]
         public ActionResult ExternalLoginFailure()
         {
-            return View();
+            return this.View();
         }
 
-        [AllowAnonymous]
-        [ChildActionOnly]
+        [AllowAnonymous, ChildActionOnly]
         public ActionResult ExternalLoginsList(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            return PartialView("_ExternalLoginsListPartial", OAuthWebSecurity.RegisteredClientData);
+            return this.PartialView("_ExternalLoginsListPartial", OpenAuth.AuthenticationClients.GetAll());
         }
 
         [ChildActionOnly]
@@ -332,46 +332,10 @@ namespace App.Web.Controllers
             }
 
             ViewBag.ShowRemoveButton = externalLogins.Count > 1 || OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
-            return PartialView("_RemoveExternalLoginsPartial", externalLogins);
+            return this.PartialView("_RemoveExternalLoginsPartial", externalLogins);
         }
 
         #region Helpers
-        private ActionResult RedirectToLocal(string returnUrl)
-        {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
-        }
-
-        public enum ManageMessageId
-        {
-            ChangePasswordSuccess,
-            SetPasswordSuccess,
-            RemoveLoginSuccess,
-        }
-
-        internal class ExternalLoginResult : ActionResult
-        {
-            public ExternalLoginResult(string provider, string returnUrl)
-            {
-                Provider = provider;
-                ReturnUrl = returnUrl;
-            }
-
-            public string Provider { get; private set; }
-            public string ReturnUrl { get; private set; }
-
-            public override void ExecuteResult(ControllerContext context)
-            {
-                OAuthWebSecurity.RequestAuthentication(Provider, ReturnUrl);
-            }
-        }
-
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)
         {
             // See http://go.microsoft.com/fwlink/?LinkID=177550 for
@@ -407,6 +371,36 @@ namespace App.Web.Controllers
 
                 default:
                     return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
+            }
+        }
+
+        private ActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return this.Redirect(returnUrl);
+            }
+            else
+            {
+                return this.RedirectToAction("Index", "Home");
+            }
+        }
+
+        internal class ExternalLoginResult : ActionResult
+        {
+            public ExternalLoginResult(string provider, string returnUrl)
+            {
+                this.Provider = provider;
+                this.ReturnUrl = returnUrl;
+            }
+
+            public string Provider { get; private set; }
+
+            public string ReturnUrl { get; private set; }
+
+            public override void ExecuteResult(ControllerContext context)
+            {
+                OpenAuth.RequestAuthentication(this.Provider, this.ReturnUrl);
             }
         }
         #endregion

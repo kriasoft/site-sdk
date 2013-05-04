@@ -1,0 +1,368 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DatabaseModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="DatabaseModelStoreContainer">
+          <EntitySet Name="AnonymousUser" EntityType="DatabaseModel.Store.AnonymousUser" store:Type="Tables" Schema="Membership" />
+          <EntitySet Name="Profile" EntityType="DatabaseModel.Store.Profile" store:Type="Tables" Schema="Membership" />
+          <EntitySet Name="User" EntityType="DatabaseModel.Store.User" store:Type="Tables" Schema="Membership" />
+          <EntitySet Name="UserOpenAuthAccount" EntityType="DatabaseModel.Store.UserOpenAuthAccount" store:Type="Tables" Schema="Membership" />
+          <EntitySet Name="UserRole" EntityType="DatabaseModel.Store.UserRole" store:Type="Tables" Schema="Membership" />
+          <EntitySet Name="UserUserRole" EntityType="DatabaseModel.Store.UserUserRole" store:Type="Tables" Schema="Membership" />
+          <AssociationSet Name="FK_Profile_User" Association="DatabaseModel.Store.FK_Profile_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Profile" EntitySet="Profile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserOpenAuthAccount_User" Association="DatabaseModel.Store.FK_UserOpenAuthAccount_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserOpenAuthAccount" EntitySet="UserOpenAuthAccount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserUserRole_User" Association="DatabaseModel.Store.FK_UserUserRole_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserUserRole" EntitySet="UserUserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserUserRole_UserRole" Association="DatabaseModel.Store.FK_UserUserRole_UserRole">
+            <End Role="UserRole" EntitySet="UserRole" />
+            <End Role="UserUserRole" EntitySet="UserUserRole" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AnonymousUser">
+          <Key>
+            <PropertyRef Name="AnonymousUserID" />
+          </Key>
+          <Property Name="AnonymousUserID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LastActivityDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Profile">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="PropertyNames" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PropertyValueStrings" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PropertyValueBinary" Type="varbinary(max)" Nullable="false" />
+          <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="EmailHash" Type="varchar" MaxLength="32" StoreGeneratedPattern="Computed" />
+          <Property Name="PasswordHash" Type="varbinary" MaxLength="24" />
+          <Property Name="PasswordSalt" Type="varbinary" MaxLength="24" />
+          <Property Name="PasswordQuestion" Type="nvarchar" MaxLength="256" />
+          <Property Name="PasswordAnswer" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsApproved" Type="bit" Nullable="false" />
+          <Property Name="IsLockedOut" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLoginDate" Type="datetime" Nullable="false" />
+          <Property Name="LastActivityDate" Type="datetime" Nullable="false" />
+          <Property Name="LastPasswordChangedDate" Type="datetime" />
+          <Property Name="LastLockoutDate" Type="datetime" />
+          <Property Name="FailedPasswordAttemptCount" Type="int" Nullable="false" />
+          <Property Name="FailedPasswordAttemptWindowStart" Type="datetime" />
+          <Property Name="FailedPasswordAnswerAttemptCount" Type="int" Nullable="false" />
+          <Property Name="FailedPasswordAnswerAttemptWindowsStart" Type="datetime" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="UserOpenAuthAccount">
+          <Key>
+            <PropertyRef Name="ProviderName" />
+            <PropertyRef Name="ProviderUserID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="ProviderName" Type="nvarchar" Nullable="false" MaxLength="24" />
+          <Property Name="ProviderUserID" Type="nvarchar" Nullable="false" MaxLength="64" />
+          <Property Name="ProviderUserName" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="LastUsedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="tinyint" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UserUserRole">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="RoleID" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Profile_User">
+          <End Role="User" Type="DatabaseModel.Store.User" Multiplicity="1" />
+          <End Role="Profile" Type="DatabaseModel.Store.Profile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Profile">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserOpenAuthAccount_User">
+          <End Role="User" Type="DatabaseModel.Store.User" Multiplicity="1" />
+          <End Role="UserOpenAuthAccount" Type="DatabaseModel.Store.UserOpenAuthAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserOpenAuthAccount">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserUserRole_User">
+          <End Role="User" Type="DatabaseModel.Store.User" Multiplicity="1" />
+          <End Role="UserUserRole" Type="DatabaseModel.Store.UserUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserUserRole">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserUserRole_UserRole">
+          <End Role="UserRole" Type="DatabaseModel.Store.UserRole" Multiplicity="1" />
+          <End Role="UserUserRole" Type="DatabaseModel.Store.UserUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRole">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="UserUserRole">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DatabaseModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DatabaseContext" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="AnonymousUsers" EntityType="DatabaseModel.AnonymousUser" />
+          <EntitySet Name="Profiles" EntityType="DatabaseModel.Profile" />
+          <EntitySet Name="Users" EntityType="DatabaseModel.User" />
+          <EntitySet Name="UserOpenAuthAccounts" EntityType="DatabaseModel.UserOpenAuthAccount" />
+          <EntitySet Name="UserRoles" EntityType="DatabaseModel.UserRole" />
+          <AssociationSet Name="FK_Profile_User" Association="DatabaseModel.FK_Profile_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Profile" EntitySet="Profiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserOpenAuthAccount_User" Association="DatabaseModel.FK_UserOpenAuthAccount_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserOpenAuthAccount" EntitySet="UserOpenAuthAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="UserUserRole" Association="DatabaseModel.UserUserRole">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserRole" EntitySet="UserRoles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AnonymousUser">
+          <Key>
+            <PropertyRef Name="AnonymousUserID" />
+          </Key>
+          <Property Name="AnonymousUserID" Type="Guid" Nullable="false" />
+          <Property Name="LastActivityDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Profile">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="PropertyNames" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="PropertyValueStrings" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="PropertyValueBinary" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="LastUpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="User" Relationship="DatabaseModel.FK_Profile_User" FromRole="Profile" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DisplayName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="EmailHash" Type="String" MaxLength="32" Unicode="false" FixedLength="false" p1:StoreGeneratedPattern="Computed" />
+          <Property Name="PasswordHash" Type="Binary" MaxLength="24" FixedLength="false" />
+          <Property Name="PasswordSalt" Type="Binary" MaxLength="24" FixedLength="false" />
+          <Property Name="PasswordQuestion" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
+          <Property Name="PasswordAnswer" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="IsApproved" Type="Boolean" Nullable="false" />
+          <Property Name="IsLockedOut" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastLoginDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastActivityDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastPasswordChangedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastLockoutDate" Type="DateTime" Precision="3" />
+          <Property Name="FailedPasswordAttemptCount" Type="Int32" Nullable="false" />
+          <Property Name="FailedPasswordAttemptWindowStart" Type="DateTime" Precision="3" />
+          <Property Name="FailedPasswordAnswerAttemptCount" Type="Int32" Nullable="false" />
+          <Property Name="FailedPasswordAnswerAttemptWindowsStart" Type="DateTime" Precision="3" />
+          <Property Name="Comment" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Profile" Relationship="DatabaseModel.FK_Profile_User" FromRole="User" ToRole="Profile" />
+          <NavigationProperty Name="OpenAuthAccounts" Relationship="DatabaseModel.FK_UserOpenAuthAccount_User" FromRole="User" ToRole="UserOpenAuthAccount" />
+          <NavigationProperty Name="UserRoles" Relationship="DatabaseModel.UserUserRole" FromRole="User" ToRole="UserRole" />
+        </EntityType>
+        <EntityType Name="UserOpenAuthAccount">
+          <Key>
+            <PropertyRef Name="ProviderName" />
+            <PropertyRef Name="ProviderUserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="ProviderName" Type="String" Nullable="false" MaxLength="24" Unicode="true" FixedLength="false" />
+          <Property Name="ProviderUserID" Type="String" Nullable="false" MaxLength="64" Unicode="true" FixedLength="false" />
+          <Property Name="ProviderUserName" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="LastUsedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="User" Relationship="DatabaseModel.FK_UserOpenAuthAccount_User" FromRole="UserOpenAuthAccount" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Byte" Nullable="false" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Users" Relationship="DatabaseModel.UserUserRole" FromRole="UserRole" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Profile_User">
+          <End Role="User" Type="DatabaseModel.User" Multiplicity="1" />
+          <End Role="Profile" Type="DatabaseModel.Profile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Profile">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserOpenAuthAccount_User">
+          <End Role="User" Type="DatabaseModel.User" Multiplicity="1" />
+          <End Role="UserOpenAuthAccount" Type="DatabaseModel.UserOpenAuthAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserOpenAuthAccount">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserUserRole">
+          <End Role="User" Type="DatabaseModel.User" Multiplicity="*" />
+          <End Role="UserRole" Type="DatabaseModel.UserRole" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DatabaseModelStoreContainer" CdmEntityContainer="DatabaseContext">
+          <EntitySetMapping Name="AnonymousUsers">
+            <EntityTypeMapping TypeName="DatabaseModel.AnonymousUser">
+              <MappingFragment StoreEntitySet="AnonymousUser">
+                <ScalarProperty Name="AnonymousUserID" ColumnName="AnonymousUserID" />
+                <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profiles">
+            <EntityTypeMapping TypeName="DatabaseModel.Profile">
+              <MappingFragment StoreEntitySet="Profile">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="PropertyNames" ColumnName="PropertyNames" />
+                <ScalarProperty Name="PropertyValueStrings" ColumnName="PropertyValueStrings" />
+                <ScalarProperty Name="PropertyValueBinary" ColumnName="PropertyValueBinary" />
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="DatabaseModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailHash" ColumnName="EmailHash" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="PasswordQuestion" ColumnName="PasswordQuestion" />
+                <ScalarProperty Name="PasswordAnswer" ColumnName="PasswordAnswer" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+                <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
+                <ScalarProperty Name="LastPasswordChangedDate" ColumnName="LastPasswordChangedDate" />
+                <ScalarProperty Name="LastLockoutDate" ColumnName="LastLockoutDate" />
+                <ScalarProperty Name="FailedPasswordAttemptCount" ColumnName="FailedPasswordAttemptCount" />
+                <ScalarProperty Name="FailedPasswordAttemptWindowStart" ColumnName="FailedPasswordAttemptWindowStart" />
+                <ScalarProperty Name="FailedPasswordAnswerAttemptCount" ColumnName="FailedPasswordAnswerAttemptCount" />
+                <ScalarProperty Name="FailedPasswordAnswerAttemptWindowsStart" ColumnName="FailedPasswordAnswerAttemptWindowsStart" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserOpenAuthAccounts">
+            <EntityTypeMapping TypeName="DatabaseModel.UserOpenAuthAccount">
+              <MappingFragment StoreEntitySet="UserOpenAuthAccount">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ProviderName" ColumnName="ProviderName" />
+                <ScalarProperty Name="ProviderUserID" ColumnName="ProviderUserID" />
+                <ScalarProperty Name="ProviderUserName" ColumnName="ProviderUserName" />
+                <ScalarProperty Name="LastUsedDate" ColumnName="LastUsedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="DatabaseModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRole">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="UserUserRole" TypeName="DatabaseModel.UserUserRole" StoreEntitySet="UserUserRole">
+            <EndProperty Name="User">
+              <ScalarProperty Name="UserID" ColumnName="UserID" />
+            </EndProperty>
+            <EndProperty Name="UserRole">
+              <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

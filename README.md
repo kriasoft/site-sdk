@@ -1,3 +1,4 @@
+<img src="http://i.imgur.com/mGy9OWv.png" alt="" style="float:right;padding:0 0 6px 12px;" />
 # Web Application Starter Kit for .NET developers
 
 This a solution (project) template of a typical web application built on top of the following technologies:
@@ -6,18 +7,17 @@ This a solution (project) template of a typical web application built on top of 
  - SQL Server Database Project with [SSDT](http://msdn.microsoft.com/en-us/data/tools.aspx)
  - [Entity Framework](http://msdn.microsoft.com/en-us/data/ef.aspx) 5 with [Database First](http://msdn.microsoft.com/en-us/data/jj206878.aspx)
  - Real-time web functionality with [SignalR](http://www.asp.net/signalr)
- - Dependency Injection (IoC) with [Autofac](http://code.google.com/p/autofac/)
+ - [Enterprise Library 6.0](http://msdn.microsoft.com/en-us/library/ff648951.aspx)
  - [AngularJS](http://angularjs.org) JavaScript MVC Framework
  - [Windows Azure SDK](http://www.windowsazure.com/en-us/develop/net/)
  - [NuGet](http://nuget.org/) with [Package Restore](http://docs.nuget.org/docs/workflows/using-nuget-without-committing-packages)
 
-It is supposed to be uased as a base repo for your apps from which you can pull latest changes during development.
+You can use it to bootstrap your web and cloud app projects and dev environment. The main advantabe of building your app
+on top of it - is that you'll be able to pull and merge updates at any time in the future by using Git functionality.
 
-You can use it to bootstrap your web app projects and dev environment for these projects.
-
-The starter kit contains multi-project solution structure, a set of 3rd party libraries, tools and a bounch of scripts all preconfigured for instant web development gratification. Just clone the repo, open ```Source/Application.sln``` and you are ready to develop and test your application.
-
-![Solution](http://i.imgur.com/mGy9OWv.png)
+The starter kit contains multi-project solution structure, a set of 3rd party libraries, tools and a bounch of scripts
+all preconfigured for instant web development gratification. Just clone the repo, open ```Source/Application.sln```
+and you are ready to develop and test your application.
 
 ### Getting Started
 
@@ -38,6 +38,10 @@ Later on you can always pull and merge the latest changes from [SiteSDK](https:/
     git pull base master
 
 This way you will make sure that Membership Service, Email Service, Authorization via 3rd party OAuth providers and other Starter Kit's modules are all up to date, leaving your more time on developing real stuff specific to your application.
+
+### Database Context / Entities
+
+![Database Context / Entities](http://i.imgur.com/in7AgDB.png)
 
 ### Get Involved
 

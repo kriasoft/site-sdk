@@ -89,6 +89,8 @@
   <ItemGroup>
     <None Include="Database.publish.xml" />
     <None Include="ReferenceData\UserRole.csv" />
+    <None Include="ReferenceData\User.csv" />
+    <None Include="ReferenceData\UserUserRole.csv" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\PostDeployment.sql" />

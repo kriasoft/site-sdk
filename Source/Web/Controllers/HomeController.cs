@@ -12,23 +12,23 @@ namespace App.Web.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+            this.ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
 
-            return View();
+            return this.View();
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your app description page.";
+            this.ViewBag.Message = "Your app description page.";
 
-            return View();
+            return this.View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            this.ViewBag.Message = "Your contact page.";
 
-            return View();
+            return this.View();
         }
     }
 }

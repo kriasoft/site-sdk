@@ -1,6 +1,6 @@
-﻿@model ICollection<AuthenticationClientData>
+﻿@model IEnumerable<Microsoft.AspNet.Membership.OpenAuth.ProviderDetails>
 
-@if (Model.Count == 0)
+@if (!Model.Any())
 {
     <div class="message-info">
         <p>There are no external authentication services configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=252166">this article</a>
@@ -15,9 +15,9 @@ else
     <fieldset id="socialLoginList">
         <legend>Log in using another service</legend>
         <p>
-        @foreach (AuthenticationClientData p in Model)
+        @foreach (Microsoft.AspNet.Membership.OpenAuth.ProviderDetails p in Model)
         {
-            <button type="submit" name="provider" value="@p.AuthenticationClient.ProviderName" title="Log in using your @p.DisplayName account">@p.DisplayName</button>
+            <button type="submit" name="provider" value="@p.ProviderName" title="Log in using your @p.ProviderDisplayName account">@p.ProviderDisplayName</button>
         }
         </p>
     </fieldset>

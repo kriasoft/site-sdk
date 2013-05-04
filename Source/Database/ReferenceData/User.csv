@@ -1,0 +1,2 @@
+﻿UserID | UserName | DisplayName   | Email             | PasswordHash                                       | PasswordSalt                                       | IsApproved | CreatedDate         | LastLoginDate       | LastActivityDate
+1      | admin    | Administrator | admin@example.com | 0x77D665A1DFC9F32FC6D5E09E755670CCEDA834D0FF4CEFAB | 0xCAFD5B1D89620DCD1E34FE9C1BFF104256143B9FA580B9F3 | 1          | 2013-01-01 00:00:00 | 2013-01-01 00:00:00 | 2013-01-01 00:00:00

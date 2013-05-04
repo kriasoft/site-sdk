@@ -6,26 +6,33 @@
 
 namespace App.Web
 {
+    using Microsoft.AspNet.Membership.OpenAuth;
+    using Microsoft.AspNet.Membership.OpenAuth.Data;
+
     public static class AuthConfig
     {
+
         public static void RegisterAuth()
         {
             // To let users of this site log in using their accounts from other sites such as Microsoft, Facebook, and Twitter,
             // you must update this site. For more information visit http://go.microsoft.com/fwlink/?LinkID=252166
 
-            //OAuthWebSecurity.RegisterMicrosoftClient(
+            OpenAuth.UsersAccountsTableName = "[Membership].[UserOpenAuthAccount]";
+            OpenAuth.UsersDataTableName = "[Membership].[UserOpenAuthData]";
+
+            //OpenAuth.AuthenticationClients.AddMicrosoft(
             //    clientId: "",
             //    clientSecret: "");
 
-            //OAuthWebSecurity.RegisterTwitterClient(
+            //OpenAuth.AuthenticationClients.AddTwitter(
             //    consumerKey: "",
             //    consumerSecret: "");
 
-            //OAuthWebSecurity.RegisterFacebookClient(
+            //OpenAuth.AuthenticationClients.AddFacebook(
             //    appId: "",
             //    appSecret: "");
 
-            //OAuthWebSecurity.RegisterGoogleClient();
+            OpenAuth.AuthenticationClients.AddGoogle();
         }
     }
 }
