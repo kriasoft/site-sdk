@@ -1,5 +1,6 @@
-<img src="http://i.imgur.com/mGy9OWv.png" alt="" style="float:right;padding:0 0 6px 12px;" />
 # Web Application Starter Kit for .NET developers
+
+![Solution](http://i.imgur.com/mGy9OWv.png)
 
 This a solution (project) template of a typical web application built on top of the following technologies:
 
