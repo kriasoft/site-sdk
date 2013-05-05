@@ -40,7 +40,7 @@ Later on you can always pull and merge the latest changes from [SiteSDK](https:/
 
 This way you will make sure that Membership Service, Email Service, Authorization via 3rd party OAuth providers and other Starter Kit's modules are all up to date, leaving your more time on developing real stuff specific to your application.
 
-### Database Context / Entities
+### Membership Entities
 
 ![Database Context / Entities](http://i.imgur.com/in7AgDB.png)
 
