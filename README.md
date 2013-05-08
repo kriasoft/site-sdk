@@ -1,8 +1,6 @@
 ## Web Application Starter Kit for .NET developers
 
-![Logos](http://i.imgur.com/FPF58Bs.png)
-
-![Solution](http://i.imgur.com/mGy9OWv.png)
+![Solution](http://i.imgur.com/Gg8T6Yb.png)
 
 This a solution (project) template of a typical web application built on top of the following technologies:
 
