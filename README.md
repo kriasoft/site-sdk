@@ -1,4 +1,6 @@
-# Web Application Starter Kit for .NET developers
+## Web Application Starter Kit for .NET developers
+
+![Logos](http://i.imgur.com/FPF58Bs.png)
 
 ![Solution](http://i.imgur.com/mGy9OWv.png)
 
