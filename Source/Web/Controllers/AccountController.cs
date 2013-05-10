@@ -29,6 +29,7 @@ namespace App.Web.Controllers
         public AccountController(IMembershipService membershipService)
         {
             this.membership = membershipService;
+            this.membership.RegisterModelState(this.ModelState);
         }
 
         public enum ManageMessageId
@@ -52,18 +53,10 @@ namespace App.Web.Controllers
         [HttpPost, AllowAnonymous, ValidateAntiForgeryToken]
         public ActionResult LogIn(LoginModel model, string returnUrl)
         {
-            if (this.ModelState.IsValid)
+            if (this.ModelState.IsValid && this.membership.ValidateUser(model.UserName, model.Password))
             {
-                try
-                {
-                    this.membership.ValidateUser(model.UserName, model.Password);
-                    FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
-                    return this.RedirectToLocal(returnUrl);
-                }
-                catch (ApplicationException ex)
-                {
-                    this.ModelState.AddModelError(string.Empty, ex.Message);
-                }
+                FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+                return this.RedirectToLocal(returnUrl);
             }
 
             // If we got this far, something failed, redisplay form
@@ -92,19 +85,13 @@ namespace App.Web.Controllers
         [HttpPost, AllowAnonymous, ValidateAntiForgeryToken]
         public ActionResult Register(RegisterModel model)
         {
-            if (this.ModelState.IsValid)
+            App.Data.User user;
+
+            // Attempt to register the user
+            if (this.ModelState.IsValid && (user = this.membership.CreateUser(model.UserName, model.Email, model.Password)) != null)
             {
-                // Attempt to register the user
-                try
-                {
-                    var user = this.membership.CreateUser(model.UserName, model.Email, model.Password);
-                    FormsAuthentication.SetAuthCookie(user.UserName, true);
-                    return this.RedirectToAction("Index", "Home");
-                }
-                catch (ApplicationException ex)
-                {
-                    this.ModelState.AddModelError(string.Empty, ex.Message);
-                }
+                FormsAuthentication.SetAuthCookie(user.UserName, true);
+                return this.RedirectToAction("Index", "Home");
             }
 
             // If we got this far, something failed, redisplay form

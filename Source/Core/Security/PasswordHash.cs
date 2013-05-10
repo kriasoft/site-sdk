@@ -8,9 +8,7 @@ namespace App.Security
 {
     using System.Security.Cryptography;
 
-    /// <summary>
-    /// An utility class for salted password hashing with PBKDF2-SHA1
-    /// </summary>
+    /// <summary>An utility class for salted password hashing with PBKDF2-SHA1</summary>
     internal class PasswordHash
     {
         public const int SaltBytes = 24;
@@ -21,9 +19,7 @@ namespace App.Security
         public const int SaltIndex = 1;
         public const int HashIndex = 2;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PasswordHash"/> class.
-        /// </summary>
+        /// <summary>Initializes a new instance of the <see cref="PasswordHash"/> class.</summary>
         /// <param name="hash">Password hash</param>
         /// <param name="salt">Password salt</param>
         private PasswordHash(byte[] hash, byte[] salt)
@@ -32,19 +28,13 @@ namespace App.Security
             this.Salt = salt;
         }
 
-        /// <summary>
-        /// Gets password hash
-        /// </summary>
+        /// <summary>Gets password hash</summary>
         public byte[] Hash { get; private set; }
 
-        /// <summary>
-        /// Gets password salt
-        /// </summary>
+        /// <summary>Gets password salt</summary>
         public byte[] Salt { get; private set; }
 
-        /// <summary>
-        /// Creates a salted PBKDF2 hash of the password.
-        /// </summary>
+        /// <summary>Creates a salted PBKDF2 hash of the password.</summary>
         /// <param name="password">The password to hash.</param>
         /// <returns>The hash and salt of the password.</returns>
         public static PasswordHash Create(string password)
@@ -59,9 +49,7 @@ namespace App.Security
             return new PasswordHash(hash, salt);
         }
 
-        /// <summary>
-        /// Validates a password against given hash and salt.
-        /// </summary>
+        /// <summary>Validates a password against given hash and salt.</summary>
         /// <param name="password">The password to check.</param>
         /// <param name="hash">A hash of the correct password.</param>
         /// <param name="salt">A salt of the correct password.</param>
@@ -72,10 +60,8 @@ namespace App.Security
             return Equals(hash, testHash);
         }
 
-        /// <summary>
-        /// Compares two byte arrays in length-constant time. This comparison method is used so that password hashes
-        /// cannot be extracted from on-line systems using a timing attack and then attacked off-line.
-        /// </summary>
+        /// <summary>Compares two byte arrays in length-constant time. This comparison method is used so that password
+        /// hashes cannot be extracted from on-line systems using a timing attack and then attacked off-line.</summary>
         /// <param name="a">The first byte array.</param>
         /// <param name="b">The second byte array.</param>
         /// <returns>True if both byte arrays are equal. False otherwise.</returns>
@@ -91,9 +77,7 @@ namespace App.Security
             return diff == 0;
         }
 
-        /// <summary>
-        /// Computes the PBKDF2-SHA1 hash of a password.
-        /// </summary>
+        /// <summary>Computes the PBKDF2-SHA1 hash of a password.</summary>
         /// <param name="password">The password to hash.</param>
         /// <param name="salt">The salt.</param>
         /// <param name="iterations">The PBKDF2 iteration count.</param>
