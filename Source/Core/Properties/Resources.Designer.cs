@@ -70,6 +70,15 @@ namespace App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to External authentication account for user with user name &quot;{0}&quot; could not be found..
+        /// </summary>
+        internal static string ExternalAccountNotFound {
+            get {
+                return ResourceManager.GetString("ExternalAccountNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Membership user with user name &quot;{0}&quot; could not be found..
         /// </summary>
         internal static string MembershipUserNotFound {

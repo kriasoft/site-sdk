@@ -8,6 +8,7 @@ namespace App.Web.Controllers
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Transactions;
     using System.Web.Mvc;
     using System.Web.Security;
@@ -106,24 +107,8 @@ namespace App.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Disassociate(string provider, string providerUserId)
         {
-            string ownerAccount = OAuthWebSecurity.GetUserName(provider, providerUserId);
-            ManageMessageId? message = null;
-
-            // Only disassociate the account if the currently logged in user is the owner
-            if (ownerAccount == User.Identity.Name)
-            {
-                // Use a transaction to prevent the user from deleting their last login credential
-                using (var scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.Serializable }))
-                {
-                    bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
-                    if (hasLocalAccount || OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name).Count > 1)
-                    {
-                        OAuthWebSecurity.DeleteAccount(provider, providerUserId);
-                        scope.Complete();
-                        message = ManageMessageId.RemoveLoginSuccess;
-                    }
-                }
-            }
+            var message = this.membership.RemoveOpenAuthAccount(User.Identity.Name, provider, providerUserId) ?
+                          ManageMessageId.RemoveLoginSuccess : (ManageMessageId?)null;
 
             return this.RedirectToAction("Manage", new { Message = message });
         }
@@ -137,7 +122,7 @@ namespace App.Web.Controllers
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
                 : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
                 : string.Empty;
-            ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+            ViewBag.HasLocalPassword = this.membership.HasPassword(User.Identity.Name);
             ViewBag.ReturnUrl = Url.Action("Manage");
             return this.View();
         }
@@ -147,10 +132,10 @@ namespace App.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Manage(LocalPasswordModel model)
         {
-            bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
-            ViewBag.HasLocalPassword = hasLocalAccount;
+            ViewBag.HasLocalPassword = this.membership.HasPassword(User.Identity.Name);
             ViewBag.ReturnUrl = Url.Action("Manage");
-            if (hasLocalAccount)
+
+            if (ViewBag.HasLocalPassword)
             {
                 if (ModelState.IsValid)
                 {
@@ -158,7 +143,7 @@ namespace App.Web.Controllers
                     bool changePasswordSucceeded;
                     try
                     {
-                        changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword);
+                        changePasswordSucceeded = this.membership.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword);
                     }
                     catch (Exception)
                     {
@@ -187,15 +172,8 @@ namespace App.Web.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    try
-                    {
-                        WebSecurity.CreateAccount(User.Identity.Name, model.NewPassword);
-                        return this.RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
-                    }
-                    catch (Exception)
-                    {
-                        this.ModelState.AddModelError(string.Empty, string.Format("Unable to create local account. An account with the name \"{0}\" may already exist.", User.Identity.Name));
-                    }
+                    this.membership.SetPassword(User.Identity.Name, model.NewPassword);
+                    return this.RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
                 }
             }
 
@@ -273,7 +251,7 @@ namespace App.Web.Controllers
             if (ModelState.IsValid && (user = this.membership.CreateUser(
                         userName: model.UserName,
                         email: model.Email,
-                        password: Membership.GeneratePassword(8, 0),
+                        password: null,
                         providerName: provider,
                         providerUserID: providerUserId,
                         providerUserName: providerUserName)) != null)
@@ -305,21 +283,14 @@ namespace App.Web.Controllers
         [ChildActionOnly]
         public ActionResult RemoveExternalLogins()
         {
-            ICollection<OAuthAccount> accounts = OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name);
-            List<ExternalLogin> externalLogins = new List<ExternalLogin>();
-            foreach (OAuthAccount account in accounts)
+            var externalLogins = this.membership.GetOpenAuthAccounts(User.Identity.Name).Select(account => new ExternalLogin
             {
-                AuthenticationClientData clientData = OAuthWebSecurity.GetOAuthClientData(account.Provider);
+                Provider = account.ProviderName,
+                ProviderDisplayName = OpenAuth.AuthenticationClients.GetDisplayName(account.ProviderName),
+                ProviderUserId = account.ProviderUserID,
+            }).ToList();
 
-                externalLogins.Add(new ExternalLogin
-                {
-                    Provider = account.Provider,
-                    ProviderDisplayName = clientData.DisplayName,
-                    ProviderUserId = account.ProviderUserId,
-                });
-            }
-
-            ViewBag.ShowRemoveButton = externalLogins.Count > 1 || OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+            ViewBag.ShowRemoveButton = externalLogins.Count > 1 || this.membership.HasPassword(User.Identity.Name);
             return this.PartialView("_RemoveExternalLoginsPartial", externalLogins);
         }
 

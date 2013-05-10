@@ -120,6 +120,9 @@
   <data name="ArgumentNullOrEmpty" xml:space="preserve">
     <value>Argument cannot be null or empty.</value>
   </data>
+  <data name="ExternalAccountNotFound" xml:space="preserve">
+    <value>External authentication account for user with user name "{0}" could not be found.</value>
+  </data>
   <data name="MembershipUserNotFound" xml:space="preserve">
     <value>Membership user with user name "{0}" could not be found.</value>
   </data>

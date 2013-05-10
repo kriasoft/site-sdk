@@ -19,6 +19,8 @@ namespace App.Security
         public const int SaltIndex = 1;
         public const int HashIndex = 2;
 
+        private static PasswordHash emptyHash = new PasswordHash(new byte[0], new byte[0]);
+
         /// <summary>Initializes a new instance of the <see cref="PasswordHash"/> class.</summary>
         /// <param name="hash">Password hash</param>
         /// <param name="salt">Password salt</param>
@@ -26,6 +28,12 @@ namespace App.Security
         {
             this.Hash = hash;
             this.Salt = salt;
+        }
+
+        /// <summary>Gets an empty password hash and salt.</summary>
+        public static PasswordHash Empty
+        {
+            get { return emptyHash; }
         }
 
         /// <summary>Gets password hash</summary>
