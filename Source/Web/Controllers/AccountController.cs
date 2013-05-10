@@ -220,7 +220,7 @@ namespace App.Web.Controllers
                 return this.RedirectToAction("ExternalLoginFailure");
             }
 
-            if (OpenAuth.Login(result.Provider, result.ProviderUserId, createPersistentCookie: false))
+            if (this.membership.ValidateOpenAuthUser(result.Provider, result.ProviderUserId, createPersistentCookie: false))
             {
                 return this.RedirectToLocal(returnUrl);
             }
@@ -228,7 +228,7 @@ namespace App.Web.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 // If the current user is logged in add the new account
-                OpenAuth.AddAccountToExistingUser(result.Provider, result.ProviderUserId, result.UserName, User.Identity.Name);
+                this.membership.AddOpenAuthAccount(User.Identity.Name, result.Provider, result.ProviderUserId, result.UserName);
                 return this.RedirectToLocal(returnUrl);
             }
             else
@@ -265,20 +265,18 @@ namespace App.Web.Controllers
             string providerUserId = loginData[1];
             string providerUserName = loginData[2];
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    var user = this.membership.CreateUser(model.UserName, model.Email, Membership.GeneratePassword(8, 0));
-                    OpenAuth.CreateUser(provider, providerUserId, providerUserName, user.UserName);
-                    FormsAuthentication.SetAuthCookie(user.UserName, createPersistentCookie: false);
+            App.Data.User user;
 
+            if (ModelState.IsValid && (user = this.membership.CreateUser(
+                        userName: model.UserName,
+                        email: model.Email,
+                        password: Membership.GeneratePassword(8, 0),
+                        providerName: provider,
+                        providerUserID: providerUserId,
+                        providerUserName: providerUserName)) != null)
+            {
+                    FormsAuthentication.SetAuthCookie(user.UserName, createPersistentCookie: false);
                     return this.RedirectToLocal(returnUrl);
-                }
-                catch (ApplicationException ex)
-                {
-                    this.ModelState.AddModelError(string.Empty, ex.Message);
-                }
             }
 
             ViewBag.ProviderDisplayName = OpenAuth.GetProviderDisplayName(provider);

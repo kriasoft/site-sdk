@@ -79,7 +79,7 @@
           </Key>
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="ProviderName" Type="nvarchar" Nullable="false" MaxLength="24" />
-          <Property Name="ProviderUserID" Type="nvarchar" Nullable="false" MaxLength="64" />
+          <Property Name="ProviderUserID" Type="nvarchar" Nullable="false" MaxLength="128" />
           <Property Name="ProviderUserName" Type="nvarchar" Nullable="false" MaxLength="128" />
           <Property Name="LastUsedDate" Type="datetime" />
         </EntityType>
@@ -223,7 +223,7 @@
           </Key>
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="ProviderName" Type="String" Nullable="false" MaxLength="24" Unicode="true" FixedLength="false" />
-          <Property Name="ProviderUserID" Type="String" Nullable="false" MaxLength="64" Unicode="true" FixedLength="false" />
+          <Property Name="ProviderUserID" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
           <Property Name="ProviderUserName" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
           <Property Name="LastUsedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="User" Relationship="DatabaseModel.FK_UserOpenAuthAccount_User" FromRole="UserOpenAuthAccount" ToRole="User" />

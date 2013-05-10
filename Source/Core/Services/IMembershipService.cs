@@ -9,18 +9,32 @@ namespace App.Services
     using System;
     using System.Data;
     using System.Linq;
+    using System.Web;
     using System.Web.Mvc;
 
     using App.Data;
+    using App.Properties;
     using App.Security;
+
+    using DotNetOpenAuth.AspNet;
+    using Microsoft.AspNet.Membership.OpenAuth;
 
     public interface IMembershipService
     {
         void RegisterModelState(ModelStateDictionary modelState);
 
-        User CreateUser(string userName, string email, string password);
+        User CreateUser(string userName, string email, string password, string providerName = null, string providerUserID = null, string providerUserName = null);
 
         bool ValidateUser(string userName, string password, bool updateLastLoginDate = true);
+
+        bool ValidateOpenAuthUser(string providerName, string providerUserID, bool createPersistentCookie);
+
+        /// <summary>Adds an external login account to an existing membership user.</summary>
+        /// <param name="userName">The user name of the local membership user.</param>
+        /// <param name="providerName">The name of the external authentication provider.</param>
+        /// <param name="providerUserID">The user ID of the user with the external authentication provider.</param>
+        /// <param name="providerUserName">The user name of the user with the external authentication provider.</param>
+        void AddOpenAuthAccount(string userName, string providerName, string providerUserID, string providerUserName);
     }
 
     public class MembershipService : IMembershipService
@@ -44,7 +58,7 @@ namespace App.Services
             this.modelState = modelState;
         }
 
-        public User CreateUser(string userName, string email, string password)
+        public User CreateUser(string userName, string email, string password, string providerName = null, string providerUserID = null, string providerUserName = null)
         {
             var dateNow = DateTime.UtcNow;
             var hash = PasswordHash.Create(password);
@@ -61,6 +75,11 @@ namespace App.Services
                 LastActivityDate = dateNow
             };
 
+            if (!string.IsNullOrWhiteSpace(providerName))
+            {
+                user.OpenAuthAccounts.Add(new UserOpenAuthAccount { ProviderName = providerName, ProviderUserID = providerUserID, ProviderUserName = providerUserName, LastUsedDate = dateNow });
+            }
+
             try
             {
                 this.db.Users.Add(user);
@@ -72,6 +91,7 @@ namespace App.Services
                 if (ex.InnerException != null && ex.InnerException.InnerException != null && ex.InnerException.InnerException.Message.Contains("UK_User_UserName"))
                 {
                     this.AddModelError(string.Format("The username '{0}' is already registered.", userName));
+                    return null;
                 }
                 else
                 {
@@ -114,6 +134,77 @@ namespace App.Services
 
             this.db.SaveChanges();
             return true;
+        }
+
+        public bool ValidateOpenAuthUser(string providerName, string providerUserID, bool createPersistentCookie)
+        {
+            if (string.IsNullOrEmpty(providerName))
+            {
+                throw new ArgumentException(Resources.ArgumentNullOrEmpty, "providerName");
+            }
+
+            if (string.IsNullOrEmpty(providerUserID))
+            {
+                throw new ArgumentException(Resources.ArgumentNullOrEmpty, "providerUserID");
+            }
+
+            var openAuthAccount = this.db.UserOpenAuthAccounts.SingleOrDefault(a => a.ProviderName == providerName && a.ProviderUserID == providerUserID);
+
+            if (openAuthAccount == null)
+            {
+                return false;
+            }
+
+            openAuthAccount.LastUsedDate = DateTime.UtcNow;
+            this.db.SaveChanges();
+
+            var manager = new OpenAuthSecurityManager(new HttpContextWrapper(HttpContext.Current), OpenAuth.AuthenticationClients.GetByProviderName(providerName), new OpenAuthDataProvider(this.db));
+            return manager.Login(providerUserID, createPersistentCookie);
+        }
+
+        public void AddOpenAuthAccount(string userName, string providerName, string providerUserID, string providerUserName)
+        {
+            if (string.IsNullOrEmpty(userName))
+            {
+                throw new ArgumentException(Resources.ArgumentNullOrEmpty, "userName");
+            }
+
+            if (string.IsNullOrEmpty(providerName))
+            {
+                throw new ArgumentException(Resources.ArgumentNullOrEmpty, "providerName");
+            }
+
+            if (string.IsNullOrEmpty(providerUserID))
+            {
+                throw new ArgumentException(Resources.ArgumentNullOrEmpty, "providerUserID");
+            }
+
+            if (string.IsNullOrEmpty(providerUserName))
+            {
+                throw new ArgumentException(Resources.ArgumentNullOrEmpty, "providerUserName");
+            }
+
+            var user = this.db.Users.SingleOrDefault(u => u.UserName == userName);
+
+            if (user == null)
+            {
+                throw new InvalidOperationException(string.Format(Resources.MembershipUserNotFound, userName));
+            }
+
+            var dateNow = DateTime.UtcNow;
+
+            this.db.UserOpenAuthAccounts.Add(new UserOpenAuthAccount
+            {
+                UserID = user.UserID,
+                ProviderName = providerName,
+                ProviderUserID = providerUserID,
+                ProviderUserName = providerUserName,
+                LastUsedDate = dateNow
+            });
+
+            user.LastLoginDate = dateNow;
+            user.LastActivityDate = dateNow;
+            this.db.SaveChanges();
         }
 
         private void AddModelError(string errorMessage)
