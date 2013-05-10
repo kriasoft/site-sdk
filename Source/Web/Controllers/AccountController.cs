@@ -26,9 +26,12 @@ namespace App.Web.Controllers
     {
         private readonly IMembershipService membership;
 
-        public AccountController(IMembershipService membershipService)
+        private readonly IFormsAuthentication formsAuthentication;
+
+        public AccountController(IMembershipService membershipService, IFormsAuthentication formsAuthentication)
         {
             this.membership = membershipService;
+            this.formsAuthentication = formsAuthentication;
             this.membership.RegisterModelState(this.ModelState);
         }
 
@@ -55,7 +58,7 @@ namespace App.Web.Controllers
         {
             if (this.ModelState.IsValid && this.membership.ValidateUser(model.UserName, model.Password))
             {
-                FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+                this.formsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
                 return this.RedirectToLocal(returnUrl);
             }
 
@@ -68,7 +71,7 @@ namespace App.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult LogOut()
         {
-            FormsAuthentication.SignOut();
+            this.formsAuthentication.SignOut();
             return this.RedirectToAction("Index", "Home");
         }
 
@@ -90,7 +93,7 @@ namespace App.Web.Controllers
             // Attempt to register the user
             if (this.ModelState.IsValid && (user = this.membership.CreateUser(model.UserName, model.Email, model.Password)) != null)
             {
-                FormsAuthentication.SetAuthCookie(user.UserName, true);
+                this.formsAuthentication.SetAuthCookie(user.UserName, true);
                 return this.RedirectToAction("Index", "Home");
             }
 
@@ -275,8 +278,8 @@ namespace App.Web.Controllers
                         providerUserID: providerUserId,
                         providerUserName: providerUserName)) != null)
             {
-                    FormsAuthentication.SetAuthCookie(user.UserName, createPersistentCookie: false);
-                    return this.RedirectToLocal(returnUrl);
+                this.formsAuthentication.SetAuthCookie(user.UserName, createPersistentCookie: false);
+                return this.RedirectToLocal(returnUrl);
             }
 
             ViewBag.ProviderDisplayName = OpenAuth.GetProviderDisplayName(provider);

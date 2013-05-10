@@ -136,6 +136,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Security\CryptoUtility.cs" />
+    <Compile Include="Security\IFormsAuthentication.cs" />
     <Compile Include="Security\OpenAuthDataProvider.cs" />
     <Compile Include="Security\PasswordHash.cs" />
     <Compile Include="Services\IEmailService.cs" />

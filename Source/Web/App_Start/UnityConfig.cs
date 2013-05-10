@@ -13,6 +13,7 @@ namespace App.Web
     using System.Web.Mvc;
 
     using App.Data;
+    using App.Security;
     using App.Services;
 
     using Microsoft.Practices.Unity;
@@ -46,6 +47,7 @@ namespace App.Web
         {
             container.RegisterType<DatabaseContext>(new PerRequestLifetimeManager());
             container.RegisterType<IMembershipService, MembershipService>();
+            container.RegisterType<IFormsAuthentication, FormsAuthenticationWrapper>(new ContainerControlledLifetimeManager());
         }
 
         /// <summary>Provides the bootstrapping for integrating Unity with ASP.NET MVC.</summary>
