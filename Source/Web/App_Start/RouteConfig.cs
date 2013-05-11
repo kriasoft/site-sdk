@@ -9,6 +9,8 @@ namespace App.Web
     using System.Web.Mvc;
     using System.Web.Routing;
 
+    using App.Web.Controllers;
+
     public class RouteConfig
     {
         public static void RegisterRoutes(RouteCollection routes)
@@ -17,11 +19,7 @@ namespace App.Web
 
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapRoute(
-                name: "Account",
-                url: "{action}/{id}",
-                defaults: new { controller = "Account", action = "Index", id = UrlParameter.Optional },
-                constraints: new { action = "login|logout|register" });
+            AccountController.RegisterRoutes(routes);
 
             routes.MapRoute(
                 name: "Default",
