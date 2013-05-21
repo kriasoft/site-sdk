@@ -91,6 +91,7 @@
     <None Include="ReferenceData\UserRole.csv" />
     <None Include="ReferenceData\User.csv" />
     <None Include="ReferenceData\UserUserRole.csv" />
+    <None Include="Test.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\PostDeployment.sql" />
