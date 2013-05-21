@@ -87,7 +87,7 @@
     <Build Include="Membership\Tables\Profile.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Database.publish.xml" />
+    <None Include="Local.publish.xml" />
     <None Include="ReferenceData\UserRole.csv" />
     <None Include="ReferenceData\User.csv" />
     <None Include="ReferenceData\UserUserRole.csv" />
