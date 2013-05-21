@@ -88,18 +88,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Local.publish.xml" />
-    <None Include="ReferenceData\UserRole.csv" />
-    <None Include="ReferenceData\User.csv" />
-    <None Include="ReferenceData\UserUserRole.csv" />
     <None Include="Test.publish.xml" />
     <None Include="README.md" />
+    <None Include="ReferenceData\User.sql" />
+    <None Include="ReferenceData\UserRole.sql" />
+    <None Include="ReferenceData\UserUserRole.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\PostDeployment.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <SqlCmdVariable Include="ReferenceDataDir">
-      <DefaultValue>$(ProjectDir)ReferenceData\</DefaultValue>
-    </SqlCmdVariable>
   </ItemGroup>
 </Project>
