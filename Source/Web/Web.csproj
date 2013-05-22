@@ -292,8 +292,8 @@
     <None Include="Startup.cmd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Properties\PublishProfiles\Staging.pubxml" />
     <None Include="Properties\PublishProfiles\Production.pubxml" />
+    <None Include="Properties\PublishProfiles\Test.pubxml" />
     <None Include="Scripts\jquery-1.8.3.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.3.js" />
     <Content Include="Scripts\jquery-1.8.3.min.js" />
@@ -322,7 +322,7 @@
     <None Include="Web.Production.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-    <None Include="Web.Staging.config">
+    <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <Content Include="Content\Site.css" />
