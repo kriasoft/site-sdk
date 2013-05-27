@@ -1,5 +1,5 @@
-﻿/// <reference path="jquery-ui-1.10.2.js" />
-/// <reference path="jquery-1.8.3.js" />
+﻿/// <reference path="jquery-ui-1.10.3.js" />
+/// <reference path="jquery-2.0.0.js" />
 /// <reference path="jquery.validate.js" />
 /// <reference path="jquery.validate.unobtrusive.js" />
 /// <reference path="knockout-2.2.1.debug.js" />
