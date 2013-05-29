@@ -1,12 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.WindowsAzure;
-using Microsoft.WindowsAzure.Diagnostics;
-using Microsoft.WindowsAzure.ServiceRuntime;
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="WebRole.cs" company="KriaSoft LLC">
+//   Copyright © 2013 Konstantin Tarkus, KriaSoft LLC. See LICENSE.txt
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace App.Web
 {
+    using Microsoft.WindowsAzure.ServiceRuntime;
+
     public class WebRole : RoleEntryPoint
     {
         public override bool OnStart()

@@ -5,8 +5,8 @@
         <title>@ViewBag.Title - My ASP.NET MVC Application</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
-        @Styles.Render("~/content/css")
-        @Scripts.Render("~/bundles/modernizr")
+        @Styles.Render("~/css/site")
+        @Scripts.Render("~/js/modernizr")
     </head>
     <body data-ga="@System.Web.Configuration.WebConfigurationManager.AppSettings["GoogleAnalyticsPID"]">
         <header>
@@ -42,8 +42,8 @@
             </div>
         </footer>
 
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/site")
+        @Scripts.Render("~/js/jquery")
+        @Scripts.Render("~/js/site")
         @RenderSection("scripts", required: false)
     </body>
 </html>
