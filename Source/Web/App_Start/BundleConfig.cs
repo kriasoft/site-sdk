@@ -25,8 +25,12 @@ namespace App.Web
             bundles.Add(new ScriptBundle("~/js/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
+            bundles.Add(new ScriptBundle("~/js/bootstrap").Include("~/Scripts/bootstrap/*"));
+
             bundles.Add(new ScriptBundle("~/js/site").Include(
                         "~/Scripts/Site.js"));
+
+            bundles.Add(new StyleBundle("~/css/bootstrap").Include("~/Styles/bootstrap.css"));
 
             bundles.Add(new StyleBundle("~/css/site").Include("~/Styles/Site.css"));
         }
