@@ -226,7 +226,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
+    <Content Include="Fonts\glyphiconshalflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Fonts\glyphiconshalflings-regular.eot" />
+    <Content Include="Fonts\glyphiconshalflings-regular.otf" />
+    <Content Include="Fonts\glyphiconshalflings-regular.ttf" />
+    <Content Include="Fonts\glyphiconshalflings-regular.woff" />
     <None Include="Startup.cmd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -247,6 +252,18 @@
     <Content Include="Scripts\angular-scenario.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\bootstrap\affix.js" />
+    <Content Include="Scripts\bootstrap\alert.js" />
+    <Content Include="Scripts\bootstrap\button.js" />
+    <Content Include="Scripts\bootstrap\carousel.js" />
+    <Content Include="Scripts\bootstrap\collapse.js" />
+    <Content Include="Scripts\bootstrap\dropdown.js" />
+    <Content Include="Scripts\bootstrap\modal.js" />
+    <Content Include="Scripts\bootstrap\popover.js" />
+    <Content Include="Scripts\bootstrap\scrollspy.js" />
+    <Content Include="Scripts\bootstrap\tab.js" />
+    <Content Include="Scripts\bootstrap\tooltip.js" />
+    <Content Include="Scripts\bootstrap\transition.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
     <Content Include="Scripts\i18n\angular-locale_af-za.js" />
     <Content Include="Scripts\i18n\angular-locale_af.js" />
@@ -546,6 +563,12 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\Site.js" />
+    <Content Include="Styles\bootstrap.css">
+      <DependentUpon>bootstrap.less</DependentUpon>
+    </Content>
+    <Content Include="Styles\bootstrap.min.css">
+      <DependentUpon>bootstrap.less</DependentUpon>
+    </Content>
     <Content Include="Styles\Site.css">
       <DependentUpon>Site.less</DependentUpon>
     </Content>
@@ -562,6 +585,45 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Styles\Site.less" />
+    <Content Include="Styles\bootstrap.less" />
+    <Content Include="Styles\_accordion.less" />
+    <Content Include="Styles\_alerts.less" />
+    <Content Include="Styles\_badges.less" />
+    <Content Include="Styles\_breadcrumbs.less" />
+    <Content Include="Styles\_button-groups.less" />
+    <Content Include="Styles\_buttons.less" />
+    <Content Include="Styles\_carousel.less" />
+    <Content Include="Styles\_close.less" />
+    <Content Include="Styles\_code.less" />
+    <Content Include="Styles\_component-animations.less" />
+    <Content Include="Styles\_dropdowns.less" />
+    <Content Include="Styles\_forms.less" />
+    <Content Include="Styles\_glyphicons.less" />
+    <Content Include="Styles\_grid.less" />
+    <Content Include="Styles\_jumbotron.less" />
+    <Content Include="Styles\_labels.less" />
+    <Content Include="Styles\_list-group.less" />
+    <Content Include="Styles\_media.less" />
+    <Content Include="Styles\_mixins.less" />
+    <Content Include="Styles\_modals.less" />
+    <Content Include="Styles\_navbar.less" />
+    <Content Include="Styles\_navs.less" />
+    <Content Include="Styles\_normalize.less" />
+    <Content Include="Styles\_pager.less" />
+    <Content Include="Styles\_pagination.less" />
+    <Content Include="Styles\_panels.less" />
+    <Content Include="Styles\_popovers.less" />
+    <Content Include="Styles\_print.less" />
+    <Content Include="Styles\_progress-bars.less" />
+    <Content Include="Styles\_responsive-utilities.less" />
+    <Content Include="Styles\_scaffolding.less" />
+    <Content Include="Styles\_tables.less" />
+    <Content Include="Styles\_thumbnails.less" />
+    <Content Include="Styles\_tooltip.less" />
+    <Content Include="Styles\_type.less" />
+    <Content Include="Styles\_utilities.less" />
+    <Content Include="Styles\_variables.less" />
+    <Content Include="Styles\_wells.less" />
     <None Include="Web.Production.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
