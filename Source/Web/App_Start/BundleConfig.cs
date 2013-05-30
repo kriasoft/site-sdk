@@ -22,13 +22,11 @@ namespace App.Web
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
-            bundles.Add(new ScriptBundle("~/js/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
+            bundles.Add(new ScriptBundle("~/js/modernizr").Include("~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/js/bootstrap").Include("~/Scripts/bootstrap/*"));
 
-            bundles.Add(new ScriptBundle("~/js/site").Include(
-                        "~/Scripts/Site.js"));
+            bundles.Add(new ScriptBundle("~/js/site").Include("~/Scripts/Site.js"));
 
             bundles.Add(new StyleBundle("~/css/bootstrap").Include("~/Styles/bootstrap.css"));
 
