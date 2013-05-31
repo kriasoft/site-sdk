@@ -25,7 +25,7 @@ namespace App.Web
             bundles.Add(new ScriptBundle("~/js/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/js/bootstrap").Include("~/Scripts/bootstrap/*"));
+            bundles.Add(new ScriptBundle("~/js/bootstrap").Include("~/Scripts/bootstrap/*.js"));
 
             bundles.Add(new ScriptBundle("~/js/site").Include(
                         "~/Scripts/Site.js"));
