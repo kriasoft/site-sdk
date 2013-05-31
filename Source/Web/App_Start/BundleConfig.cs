@@ -24,7 +24,7 @@ namespace App.Web
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/js/modernizr").Include("~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/js/bootstrap").Include("~/Scripts/bootstrap/*"));
+            bundles.Add(new ScriptBundle("~/js/bootstrap").Include("~/Scripts/bootstrap/*.js"));
 
             bundles.Add(new ScriptBundle("~/js/site").Include("~/Scripts/Site.js"));
 
