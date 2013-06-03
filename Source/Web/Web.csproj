@@ -231,8 +231,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
-    <Content Include="Fonts\glyphiconshalflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Fonts\glyphiconshalflings-regular.svg" />
     <Content Include="Fonts\glyphiconshalflings-regular.eot" />
     <Content Include="Fonts\glyphiconshalflings-regular.otf" />
     <Content Include="Fonts\glyphiconshalflings-regular.ttf" />
@@ -568,12 +568,52 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\Site.js" />
+    <Content Include="Styles\_common.close.less" />
+    <Content Include="Styles\_common.component-animations.less" />
+    <Content Include="Styles\_common.dropdowns.less" />
+    <Content Include="Styles\_common.glyphicons.less" />
+    <Content Include="Styles\_common.list-group.less" />
+    <Content Include="Styles\_common.panels.less" />
+    <Content Include="Styles\_common.wells.less" />
+    <Content Include="Styles\_core.buttons.less" />
+    <Content Include="Styles\_core.code.less" />
+    <Content Include="Styles\_core.forms.less" />
+    <Content Include="Styles\_core.grid.less" />
+    <Content Include="Styles\_core.scaffolding.less" />
+    <Content Include="Styles\_core.tables.less" />
+    <Content Include="Styles\_core.type.less" />
+    <Content Include="Styles\_global.mixins.less" />
+    <Content Include="Styles\_global.variables.less" />
+    <Content Include="Styles\_misc.accordion.less" />
+    <Content Include="Styles\_misc.alerts.less" />
+    <Content Include="Styles\_misc.carousel.less" />
+    <Content Include="Styles\_misc.jumbotron.less" />
+    <Content Include="Styles\_misc.labels.less" />
+    <Content Include="Styles\_misc.madges.less" />
+    <Content Include="Styles\_misc.media.less" />
+    <Content Include="Styles\_misc.progress-bars.less" />
+    <Content Include="Styles\_misc.thumbnails.less" />
+    <Content Include="Styles\_nav.breadcrumbs.less" />
+    <Content Include="Styles\_nav.button-groups.less" />
+    <Content Include="Styles\_nav.navbar.less" />
+    <Content Include="Styles\_nav.navs.less" />
+    <Content Include="Styles\_nav.pager.less" />
+    <Content Include="Styles\_nav.pagination.less" />
+    <Content Include="Styles\_popovers.modals.less" />
+    <Content Include="Styles\_popovers.popovers.less" />
+    <Content Include="Styles\_popovers.tooltip.less" />
+    <Content Include="Styles\_reset.normalize.less" />
+    <Content Include="Styles\_reset.print.less" />
+    <Content Include="Styles\_utility.responsive-utilities.less" />
+    <Content Include="Styles\_utility.utilities.less" />
+    <Content Include="Styles\bootstrap.less" />
     <Content Include="Styles\bootstrap.css">
       <DependentUpon>bootstrap.less</DependentUpon>
     </Content>
     <Content Include="Styles\bootstrap.min.css">
       <DependentUpon>bootstrap.less</DependentUpon>
     </Content>
+    <Content Include="Styles\Site.less" />
     <Content Include="Styles\Site.css">
       <DependentUpon>Site.less</DependentUpon>
     </Content>
@@ -589,46 +629,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Styles\Site.less" />
-    <Content Include="Styles\bootstrap.less" />
-    <Content Include="Styles\_accordion.less" />
-    <Content Include="Styles\_alerts.less" />
-    <Content Include="Styles\_badges.less" />
-    <Content Include="Styles\_breadcrumbs.less" />
-    <Content Include="Styles\_button-groups.less" />
-    <Content Include="Styles\_buttons.less" />
-    <Content Include="Styles\_carousel.less" />
-    <Content Include="Styles\_close.less" />
-    <Content Include="Styles\_code.less" />
-    <Content Include="Styles\_component-animations.less" />
-    <Content Include="Styles\_dropdowns.less" />
-    <Content Include="Styles\_forms.less" />
-    <Content Include="Styles\_glyphicons.less" />
-    <Content Include="Styles\_grid.less" />
-    <Content Include="Styles\_jumbotron.less" />
-    <Content Include="Styles\_labels.less" />
-    <Content Include="Styles\_list-group.less" />
-    <Content Include="Styles\_media.less" />
-    <Content Include="Styles\_mixins.less" />
-    <Content Include="Styles\_modals.less" />
-    <Content Include="Styles\_navbar.less" />
-    <Content Include="Styles\_navs.less" />
-    <Content Include="Styles\_normalize.less" />
-    <Content Include="Styles\_pager.less" />
-    <Content Include="Styles\_pagination.less" />
-    <Content Include="Styles\_panels.less" />
-    <Content Include="Styles\_popovers.less" />
-    <Content Include="Styles\_print.less" />
-    <Content Include="Styles\_progress-bars.less" />
-    <Content Include="Styles\_responsive-utilities.less" />
-    <Content Include="Styles\_scaffolding.less" />
-    <Content Include="Styles\_tables.less" />
-    <Content Include="Styles\_thumbnails.less" />
-    <Content Include="Styles\_tooltip.less" />
-    <Content Include="Styles\_type.less" />
-    <Content Include="Styles\_utilities.less" />
-    <Content Include="Styles\_variables.less" />
-    <Content Include="Styles\_wells.less" />
     <None Include="Web.Production.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
