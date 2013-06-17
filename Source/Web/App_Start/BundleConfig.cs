@@ -14,23 +14,26 @@ namespace App.Web
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/js/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
-
-            bundles.Add(new ScriptBundle("~/js/jqueryval").Include(
-                        "~/Scripts/jquery.unobtrusive*",
-                        "~/Scripts/jquery.validate*"));
+                        "~/scripts/jquery-{version}.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
-            bundles.Add(new ScriptBundle("~/js/modernizr").Include("~/Scripts/modernizr-*"));
+            bundles.Add(new ScriptBundle("~/js/modernizr").Include("~/scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/js/bootstrap").Include("~/Scripts/bootstrap/*.js"));
+            bundles.Add(new ScriptBundle("~/js/angular", "//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js")
+                .Include("~/scripts/angular/angular.js"));
 
-            bundles.Add(new ScriptBundle("~/js/site").Include("~/Scripts/Site.js"));
+            bundles.Add(new ScriptBundle("~/js/app").Include(
+                "~/scripts/angular/angular-ui-router.js",
+                "~/scripts/app.js",
+                "~/scripts/filters.js",
+                "~/scripts/services.js",
+                "~/scripts/directives.js",
+                "~/scripts/controllers.js"));
 
-            bundles.Add(new StyleBundle("~/css/bootstrap").Include("~/Styles/bootstrap.css"));
+            bundles.Add(new StyleBundle("~/css/bootstrap").Include("~/styles/bootstrap.css"));
 
-            bundles.Add(new StyleBundle("~/css/site").Include("~/Styles/Site.css"));
+            bundles.Add(new StyleBundle("~/css/site").Include("~/styles/site.css"));
         }
     }
 }

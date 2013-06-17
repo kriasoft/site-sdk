@@ -4,12 +4,12 @@
 
 This a solution (project) template of a typical web application built on top of the following technologies:
 
- - [ASP.NET MVC 4](http://www.asp.net/mvc/mvc4), [ASP.NET Web API](http://www.asp.net/web-api), [ASP.NET Web Pages](http://www.asp.net/web-pages) (Razor)
+ - [ASP.NET Web API](http://www.asp.net/web-api), [ASP.NET Web Pages](http://www.asp.net/web-pages) (Razor)
+ - [AngularJS](http://www.angularjs.org) client side framework for building a [SPA](http://en.wikipedia.org/wiki/Single-page_application) by Google
  - SQL Server Database Project with [SSDT](http://msdn.microsoft.com/en-us/data/tools.aspx)
  - [Entity Framework](http://msdn.microsoft.com/en-us/data/ef.aspx) 5 with [Database First](http://msdn.microsoft.com/en-us/data/jj206878.aspx)
  - Real-time web functionality with [SignalR](http://www.asp.net/signalr)
  - [Enterprise Library 6.0](http://msdn.microsoft.com/en-us/library/ff648951.aspx)
- - [AngularJS](http://angularjs.org) JavaScript MVC Framework
  - [Windows Azure SDK](http://www.windowsazure.com/en-us/develop/net/)
  - [NuGet](http://nuget.org/) with [Package Restore](http://docs.nuget.org/docs/workflows/using-nuget-without-committing-packages)
 

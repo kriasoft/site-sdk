@@ -10,6 +10,7 @@ namespace App.Web
 {
     using System;
     using System.Linq;
+    using System.Web.Http;
     using System.Web.Mvc;
 
     using App.Data;
@@ -17,7 +18,9 @@ namespace App.Web
     using App.Services;
 
     using Microsoft.Practices.Unity;
-    using Microsoft.Practices.Unity.Mvc;
+    using Mvc = Microsoft.Practices.Unity.Mvc;
+    using WebApi = Microsoft.Practices.Unity.WebApi;
+    using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
     /// <summary>Specifies the Unity configuration for the main container.</summary>
     public class UnityConfig
@@ -50,20 +53,25 @@ namespace App.Web
             container.RegisterType<IFormsAuthentication, FormsAuthenticationWrapper>(new ContainerControlledLifetimeManager());
         }
 
-        /// <summary>Provides the bootstrapping for integrating Unity with ASP.NET MVC.</summary>
-        public class Activator
+        /// <summary>Provides the bootstrapping for integrating Unity with ASP.NET MVC and Web Api when it is hosted in ASP.NET.</summary>
+        public static class Activator
         {
             /// <summary>Integrates Unity when the application starts.</summary>
             public static void Start()
             {
                 var container = UnityConfig.GetConfiguredContainer();
 
+                // Unity registration for ASP.NET MVC
                 FilterProviders.Providers.Remove(FilterProviders.Providers.OfType<FilterAttributeFilterProvider>().First());
-                FilterProviders.Providers.Add(new UnityFilterAttributeFilterProvider(container));
+                FilterProviders.Providers.Add(new Mvc.UnityFilterAttributeFilterProvider(container));
+                DependencyResolver.SetResolver(new Mvc.UnityDependencyResolver(container));
+                DynamicModuleUtility.RegisterModule(typeof(Mvc.UnityPerRequestHttpModule));
 
-                DependencyResolver.SetResolver(new UnityDependencyResolver(container));
-
-                Microsoft.Web.Infrastructure.DynamicModuleHelper.DynamicModuleUtility.RegisterModule(typeof(UnityPerRequestHttpModule));
+                // Unity registration for Web API when it is hosted in ASP.NET
+                // Use UnityHierarchicalDependencyResolver if you want to use a new child container for each IHttpController resolution.
+                // var resolver = new WebApi.UnityHierarchicalDependencyResolver(container);
+                var resolver = new WebApi.UnityDependencyResolver(container);
+                GlobalConfiguration.Configuration.DependencyResolver = resolver;
             }
         }
     }

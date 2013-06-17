@@ -13,7 +13,7 @@ namespace App.Security
 
     using DotNetOpenAuth.AspNet;
 
-    internal class OpenAuthDataProvider : IOpenAuthDataProvider
+    public class OpenAuthDataProvider : IOpenAuthDataProvider
     {
         private readonly DatabaseContext db;
 

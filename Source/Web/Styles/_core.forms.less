@@ -461,3 +461,29 @@ select:focus:invalid {
         text-align: right;
     }
 }
+
+
+// Stacked input fields
+// --------------------------------------------------
+.input-stack > input:first-child,
+.input-stack > textarea:first-child {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.input-stack > input:not(:first-child),
+.input-stack > textarea:not(:first-child) {
+    margin-top: -1px;
+}
+
+.input-stack > input:last-child,
+.input-stack > textarea:last-child {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.input-stack > input:focus,
+.input-stack > textarea:focus {
+    position: relative;
+    z-index: 1;
+}

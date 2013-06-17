@@ -11,7 +11,7 @@ namespace App.Services
     using System.Data;
     using System.Linq;
     using System.Web;
-    using System.Web.Mvc;
+    using System.Web.Http.ModelBinding;
 
     using App.Data;
     using App.Properties;
@@ -24,7 +24,7 @@ namespace App.Services
     {
         void RegisterModelState(ModelStateDictionary modelState);
 
-        User CreateUser(string userName, string email, string password, string providerName = null, string providerUserID = null, string providerUserName = null);
+        User CreateUser(string userName, string email, string password, string displayName, string providerName = null, string providerUserID = null, string providerUserName = null);
 
         bool ValidateUser(string userName, string password, bool updateLastLoginDate = true);
 
@@ -73,7 +73,7 @@ namespace App.Services
     {
         private readonly DatabaseContext db;
         
-        private System.Web.Mvc.ModelStateDictionary modelState;
+        private ModelStateDictionary modelState;
 
         public MembershipService(DatabaseContext db)
         {
@@ -90,7 +90,7 @@ namespace App.Services
             this.modelState = modelState;
         }
 
-        public User CreateUser(string userName, string email, string password, string providerName = null, string providerUserID = null, string providerUserName = null)
+        public User CreateUser(string userName, string email, string password, string displayName, string providerName = null, string providerUserID = null, string providerUserName = null)
         {
             var dateNow = DateTime.UtcNow;
             var hash = string.IsNullOrEmpty(password) ? PasswordHash.Empty : PasswordHash.Create(password);
@@ -101,11 +101,24 @@ namespace App.Services
                 Email = email,
                 PasswordHash = hash.Hash,
                 PasswordSalt = hash.Salt,
+                DisplayName = displayName,
                 IsApproved = true,
                 CreatedDate = dateNow,
                 LastLoginDate = dateNow,
                 LastActivityDate = dateNow
             };
+
+            if (db.Users.Where(u => u.UserName == userName).Any())
+            {
+                this.AddModelError(string.Format("The username '{0}' is already registered.", userName));
+                return null;
+            }
+
+            if (db.Users.Any(u => u.Email == email))
+            {
+                this.AddModelError(string.Format("A user with email '{0}' is already registered."), email);
+                return null;
+            }
 
             if (!string.IsNullOrWhiteSpace(providerName))
             {

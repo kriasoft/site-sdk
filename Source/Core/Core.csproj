@@ -88,6 +88,7 @@
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -109,6 +110,7 @@
     <Compile Include="Data\AnonymousUser.cs">
       <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\DatabaseContextExtensions.cs" />
     <Compile Include="Data\Entities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -148,10 +150,14 @@
     <Compile Include="Security\PasswordHash.cs" />
     <Compile Include="Services\IEmailService.cs" />
     <Compile Include="Services\IMembershipService.cs" />
+    <Compile Include="Web\HttpContextExtensions.cs" />
+    <Compile Include="Web\Http\ApiControllerExtensions.cs" />
+    <Compile Include="Web\Http\Validation\CustomBodyModelValidator.cs" />
+    <Compile Include="Web\Routing\RouteCollectionExtensions.cs" />
+    <Compile Include="Web\Routing\WebPagesRouteHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Core\" />
-    <Folder Include="Web\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

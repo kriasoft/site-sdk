@@ -1,0 +1,37 @@
+﻿<div class="row" style="margin-top: 20%">
+    <div class="col col-6 col-md-6 col-lg-4 col-offset-4">
+        <h3>Sign In</h3>
+        <form name="form" novalidate ng-submit="login(user)">
+            <div class="alert alert-danger" ng-show="hasErrors()">@* Replace with a custom validation summary directive *@
+                <div ng-show="!modelState['']">Please fix the following errors and try again:</div>
+                <div ng-show="modelState['']">{{ modelState[''][0] }}</div>
+                <ul style="margin-bottom:0">
+                    <li ng-repeat="error in getErrors()">{{ error }}</li>
+                </ul>
+            </div>
+            <div class="input-group" ng-class="{ 'has-error': modelState.userName }">
+                <span class="input-group-addon glyphicon glyphicon-user" title="Username or email"></span>
+                <input name="userName" type="text" placeholder="Username or email" tabindex="1" autofocus ng-model="user.userName" />
+            </div>
+            <br />
+            <div class="input-group" ng-class="{ 'has-error': modelState.password }">
+                <span class="input-group-addon glyphicon glyphicon-lock" title="Password"></span>
+                <input name="password" type="password" placeholder="Password"  tabindex="2" ng-model="user.password" />
+            </div>
+            <br />
+            <div class="form-actions">
+                 <div class="btn-group pull-right">
+                     <button type="button" class="btn"><i class="icon-facebook"></i></button>
+                     <button type="button" class="btn" ng-click="externalLogin('google')"><i class="icon-google-plus"></i></button>
+                     <button type="button" class="btn"><i class="icon-twitter"></i></button>
+                 </div>
+                 <button type="submit" class="btn btn-primary" tabindex="3">Sign In</button>
+            </div>
+        </form>
+        <br />
+        <p>
+            <a href="javascript:void(0)">Forgot your password?</a><br />
+            <a href="~/register">Register a new account</a>
+        </p>
+    </div>
+</div>

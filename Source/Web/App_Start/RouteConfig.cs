@@ -10,6 +10,7 @@ namespace App.Web
     using System.Web.Routing;
 
     using App.Web.Controllers;
+    using App.Web.Routing;
 
     public class RouteConfig
     {
@@ -19,12 +20,10 @@ namespace App.Web
 
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            AccountController.RegisterRoutes(routes);
-
-            routes.MapRoute(
+            routes.MapWebPageRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional });
+                url: "{*url}",
+                path: "~/Index.cshtml");
         }
     }
 }

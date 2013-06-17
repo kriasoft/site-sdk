@@ -34,7 +34,7 @@ namespace App.Web.Controllers
         {
             this.membership = membershipService;
             this.formsAuthentication = formsAuthentication;
-            this.membership.RegisterModelState(this.ModelState);
+            //this.membership.RegisterModelState(this.ModelState);
         }
 
         public enum ManageMessageId
@@ -42,74 +42,6 @@ namespace App.Web.Controllers
             ChangePasswordSuccess,
             SetPasswordSuccess,
             RemoveLoginSuccess,
-        }
-
-        public static void RegisterRoutes(RouteCollection routes)
-        {
-            routes.MapRoute(
-                name: "AccountLocalLogin",
-                url: "{action}/{id}",
-                defaults: new { controller = "Account", action = "Index", id = UrlParameter.Optional },
-                constraints: new { action = "login|logout|register" });
-        }
-
-        //// GET: /login
-
-        [AllowAnonymous]
-        public ActionResult LogIn(string returnUrl)
-        {
-            this.ViewBag.ReturnUrl = returnUrl;
-            return this.View();
-        }
-
-        //// POST: /login
-
-        [HttpPost, AllowAnonymous, ValidateAntiForgeryToken]
-        public ActionResult LogIn(LoginModel model, string returnUrl)
-        {
-            if (this.ModelState.IsValid && this.membership.ValidateUser(model.UserName, model.Password))
-            {
-                this.formsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
-                return this.RedirectToLocal(returnUrl);
-            }
-
-            // If we got this far, something failed, redisplay form
-            return this.View(model);
-        }
-
-        //// POST: /logout
-
-        [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult LogOut()
-        {
-            this.formsAuthentication.SignOut();
-            return this.RedirectToAction("Index", "Home");
-        }
-
-        //// GET: /register
-
-        [AllowAnonymous]
-        public ActionResult Register()
-        {
-            return this.View();
-        }
-
-        //// POST: /register
-
-        [HttpPost, AllowAnonymous, ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterModel model)
-        {
-            App.Data.User user;
-
-            // Attempt to register the user
-            if (this.ModelState.IsValid && (user = this.membership.CreateUser(model.UserName, model.Email, model.Password)) != null)
-            {
-                this.formsAuthentication.SetAuthCookie(user.UserName, true);
-                return this.RedirectToAction("Index", "Home");
-            }
-
-            // If we got this far, something failed, redisplay form
-            return this.View(model);
         }
 
         //// POST: /account/disassociate
@@ -262,6 +194,7 @@ namespace App.Web.Controllers
                         userName: model.UserName,
                         email: model.Email,
                         password: null,
+                        displayName: model.UserName,
                         providerName: provider,
                         providerUserID: providerUserId,
                         providerUserName: providerUserName)) != null)

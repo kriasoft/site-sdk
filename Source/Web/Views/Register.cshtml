@@ -1,0 +1,51 @@
+﻿<div class="row" style="margin-top: 20%">
+    <div class="col col-6 col-md-6 col-lg-4 col-offset-4">
+        <h3>Register</h3>
+        <form name="form" novalidate ng-submit="register(user)">
+            <div class="alert alert-danger" ng-show="hasErrors()">@* Replace with a custom validation summary directive *@
+                <div ng-show="!modelState['']">Please fix the following errors and try again:</div>
+                <div ng-show="modelState['']">{{ modelState[''][0] }}</div>
+                <ul style="margin-bottom:0">
+                    <li ng-repeat="error in getErrors()">{{ error }}</li>
+                </ul>
+            </div>
+
+            <div class="input-group" ng-class="{ 'has-error': modelState.userName }">
+                <span class="input-group-addon glyphicon glyphicon-user" title="Username"></span>
+                <input name="userName" type="text" placeholder="Username" ng-model="user.userName" />
+            </div>
+            <p class="help-block"><span>www.example.com</span>/<mark ng-bind="user.userName ? user.userName : 'username'">username</mark></p>
+
+            <div class="input-group" ng-class="{ 'has-error': modelState.email }">
+                <span class="input-group-addon glyphicon" title="Email">@@</span>
+                <input name="email" type="email" placeholder="Email" ng-model="user.email" />
+            </div>
+            <br />
+
+            <div class="input-group" ng-class="{ 'has-error': modelState.password }">
+                <span class="input-group-addon glyphicon glyphicon-lock" title="Password"></span>
+                <input name="password" type="password" placeholder="Password" ng-model="user.password" />
+            </div>
+            <br />
+
+            <div class="input-group" ng-class="{ 'has-error': modelState.displayName }">
+                <span class="input-group-addon glyphicon glyphicon-user" title="Display Name"></span>
+                <input name="displayName" type="text" placeholder="Display name" ng-model="user.displayName" />
+            </div>
+            <p class="help-block">How you want your name to be displayed?</p>
+
+            <p class="help-block">By signing up you agree to the <a href="javascript:void(0)">terms of use</a> and <a href="javascript:void(0)">privacy policy</a>.</p>
+
+            <div class="form-actions">
+                 <div class="btn-group pull-right">
+                     <button type="button" class="btn"><i class="icon-facebook"></i></button>
+                     <button type="button" class="btn"><i class="icon-google-plus"></i></button>
+                     <button type="button" class="btn"><i class="icon-twitter"></i></button>
+                 </div>
+                 <button type="submit" class="btn btn-primary">Sign Up</button>
+            </div>
+        </form>
+        <br />
+        <p>Already have an account? <a href="~/login">Sign in</a></p>
+    </div>
+</div>
