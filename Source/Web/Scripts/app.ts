@@ -1,7 +1,7 @@
 /// <reference path="_references.ts" />
 
 angular.module('app', ['ui.state', 'app.filters', 'app.services', 'app.directives', 'app.controllers'])
-    .config(($routeProvider: ng.IRouteProvider, $locationProvider: ng.ILocationProvider, $stateProvider: any) => {
+    .config([<any>'$routeProvider', '$locationProvider', '$stateProvider', ($routeProvider: ng.IRouteProvider, $locationProvider: ng.ILocationProvider, $stateProvider: any) => {
         $locationProvider.html5Mode(true);
         $stateProvider.state('main', {
             templateUrl: '/views/layout'
@@ -29,7 +29,7 @@ angular.module('app', ['ui.state', 'app.filters', 'app.services', 'app.directive
             templateUrl: '/views/register',
             controller: 'RegisterCtrl'
         });
-    })
+    }])
     .run(['$rootScope', function ($rootScope) {
         $rootScope.$on('$stateChangeSuccess', function (event, current, previous) {
             $rootScope.title = current.title;
