@@ -2,11 +2,11 @@
 
 ![Solution](http://i.imgur.com/Gg8T6Yb.png)
 
-This a solution (project) template of a typical web application built on top of the following technologies:
+This a solution (project) template of a typical single-page web application built on top of the following technologies:
 
  - [ASP.NET Web API](http://www.asp.net/web-api), [ASP.NET Web Pages](http://www.asp.net/web-pages) (Razor)
- - [AngularJS](http://www.angularjs.org) client side framework for building a [SPA](http://en.wikipedia.org/wiki/Single-page_application) by Google
- - SQL Server Database Project with [SSDT](http://msdn.microsoft.com/en-us/data/tools.aspx)
+ - [AngularJS](http://www.angularjs.org) client side framework by Google
+ - [SQL Server](http://www.windowsazure.com/en-us/services/data-management/) database project with [SSDT](http://msdn.microsoft.com/en-us/data/tools.aspx)
  - [Entity Framework](http://msdn.microsoft.com/en-us/data/ef.aspx) 5 with [Database First](http://msdn.microsoft.com/en-us/data/jj206878.aspx)
  - Real-time web functionality with [SignalR](http://www.asp.net/signalr)
  - [Enterprise Library 6.0](http://msdn.microsoft.com/en-us/library/ff648951.aspx)
@@ -16,9 +16,21 @@ This a solution (project) template of a typical web application built on top of 
 You can use it to bootstrap your web and cloud app projects and dev environment. The main advantabe of building your app
 on top of it - is that you'll be able to pull and merge updates at any time in the future by using Git functionality.
 
-The starter kit contains multi-project solution structure, a set of 3rd party libraries, tools and a bounch of scripts
+The starter kit contains multi-project solution structure, a set of 3rd party libraries, tools and a bunch of scripts
 all preconfigured for instant web development gratification. Just clone the repo, open ```Source/Application.sln```
 and you are ready to develop and test your application.
+
+### Prerequisites
+
+ - [Visual Studio 2012](http://www.visualstudio.com) with [Update 2](http://www.microsoft.com/en-us/download/details.aspx?id=38188) and extensions:
+   - [NuGet](http://www.nuget.org) package manager
+   - [Web Tools 2012.2](http://go.microsoft.com/fwlink/?LinkId=282650)
+   - [Web Essentials 2012](http://visualstudiogallery.msdn.microsoft.com/07d54d12-7133-4e15-becb-6f451ea3bea6)
+   - [TypeScript](http://www.typescriptlang.org)
+   - [StyleCop](https://stylecop.codeplex.com/) (optional)
+   - [Windows Azure .NET SDK](http://www.windowsazure.com/en-us/downloads/?sdk=net)
+
+*Hint: make sure that you have the latest version and updates for Visual Studio and required extensions installed*
 
 ### Getting Started
 
