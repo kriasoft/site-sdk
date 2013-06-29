@@ -22,14 +22,14 @@ and you are ready to develop and test your application.
 
 ### Prerequisites
 
- - [Visual Studio 2012](http://www.visualstudio.com) with [Update 2](http://www.microsoft.com/en-us/download/details.aspx?id=38188) and extensions:
+ - [Visual Studio 2012](http://www.visualstudio.com) with [Update 3](http://go.microsoft.com/fwlink/?LinkID=290979) and extensions:
    - [NuGet](http://www.nuget.org) package manager
    - [Web Tools 2012.2](http://go.microsoft.com/fwlink/?LinkId=282650)
+   - [Windows Azure .NET SDK](http://www.windowsazure.com/en-us/downloads/?sdk=net)
    - [SQL Server Data Tools](http://msdn.microsoft.com/en-us/data/tools.aspx)
    - [Web Essentials 2012](http://visualstudiogallery.msdn.microsoft.com/07d54d12-7133-4e15-becb-6f451ea3bea6)
    - [TypeScript](http://www.typescriptlang.org)
    - [StyleCop](https://stylecop.codeplex.com/) (optional)
-   - [Windows Azure .NET SDK](http://www.windowsazure.com/en-us/downloads/?sdk=net)
 
 *Hint: make sure that you have the latest version and updates for Visual Studio and required extensions installed*
 

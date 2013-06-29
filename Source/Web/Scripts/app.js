@@ -1,13 +1,7 @@
-angular.module('app', [
-    'ui.state', 
-    'app.filters', 
-    'app.services', 
-    'app.directives', 
-    'app.controllers'
-]).config([
-    '$routeProvider', 
-    '$locationProvider', 
-    '$stateProvider', 
+angular.module('app', ['ui.state', 'app.filters', 'app.services', 'app.directives', 'app.controllers']).config([
+    '$routeProvider',
+    '$locationProvider',
+    '$stateProvider',
     function ($routeProvider, $locationProvider, $stateProvider) {
         $locationProvider.html5Mode(true);
         $stateProvider.state('main', {
@@ -36,10 +30,13 @@ angular.module('app', [
             templateUrl: '/views/register',
             controller: 'RegisterCtrl'
         });
-    }]).run([
-    '$rootScope', 
+    }
+]).run([
+    '$rootScope',
     function ($rootScope) {
         $rootScope.$on('$stateChangeSuccess', function (event, current, previous) {
             $rootScope.title = current.title;
+            ga('send', 'pageview');
         });
-    }]);
+    }
+]);

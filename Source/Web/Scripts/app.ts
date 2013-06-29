@@ -1,5 +1,7 @@
 /// <reference path="_references.ts" />
 
+declare var ga;
+
 angular.module('app', ['ui.state', 'app.filters', 'app.services', 'app.directives', 'app.controllers'])
     .config([<any>'$routeProvider', '$locationProvider', '$stateProvider', ($routeProvider: ng.IRouteProvider, $locationProvider: ng.ILocationProvider, $stateProvider: any) => {
         $locationProvider.html5Mode(true);
@@ -33,5 +35,6 @@ angular.module('app', ['ui.state', 'app.filters', 'app.services', 'app.directive
     .run(['$rootScope', function ($rootScope) {
         $rootScope.$on('$stateChangeSuccess', function (event, current, previous) {
             $rootScope.title = current.title;
+            ga('send', 'pageview');
         });
     }]);

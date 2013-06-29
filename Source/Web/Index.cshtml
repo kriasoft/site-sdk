@@ -1,4 +1,5 @@
 ﻿@using System.Web.Optimization
+@using System.Web.Configuration
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -33,7 +34,7 @@
                 e.src = '//www.google-analytics.com/analytics.js';
                 r.parentNode.insertBefore(e, r)
             }(window, document, 'script', 'ga'));
-            ga('create', '@(System.Web.Configuration.WebConfigurationManager.AppSettings["GoogleAnalyticsPID"])'); ga('send', 'pageview');
+            ga('create', '@WebConfigurationManager.AppSettings["GoogleAnalyticsPID"]');
         </script>
     </body>
 </html>
