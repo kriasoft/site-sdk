@@ -19,8 +19,7 @@
     [FailedPasswordAttemptWindowStart]        DATETIME       NULL,
     [FailedPasswordAnswerAttemptCount]        INT            NOT NULL,
     [FailedPasswordAnswerAttemptWindowsStart] DATETIME       NULL,
-    [Comment]                                 NVARCHAR (256)   NULL,
+    [Comment]                                 NVARCHAR (256) NULL,
     CONSTRAINT [PK_User_UserID] PRIMARY KEY CLUSTERED ([UserID] ASC),
     CONSTRAINT [UK_User_UserName] UNIQUE NONCLUSTERED ([UserName] ASC)
 );
-

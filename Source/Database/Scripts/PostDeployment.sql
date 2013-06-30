@@ -10,6 +10,6 @@ Post-Deployment Script Template
 --------------------------------------------------------------------------------------
 */
 
-:r ..\ReferenceData\User.sql
-:r ..\ReferenceData\UserRole.sql
-:r ..\ReferenceData\UserUserRole.sql
+:r "..\Reference Data\User.sql"
+:r "..\Reference Data\UserRole.sql"
+:r "..\Reference Data\UserUserRole.sql"

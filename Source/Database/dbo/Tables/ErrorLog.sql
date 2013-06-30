@@ -13,4 +13,3 @@ CREATE TABLE [dbo].[ErrorLog] (
     [ErrorMessage]   NVARCHAR (4000) NOT NULL,                 -- The message text of the error that occurred
     CONSTRAINT [PK_ErrorLog_ErrorLogID] PRIMARY KEY CLUSTERED ([ErrorLogID] ASC) -- Primary key (clustered) constraint
 );
-

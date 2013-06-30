@@ -4,10 +4,10 @@
     [ProviderUserID]   NVARCHAR (128) NOT NULL,
     [ProviderUserName] NVARCHAR (128) NOT NULL,
     [LastUsedDate]     DATETIME       NULL,
-    CONSTRAINT [PK_UserOpenAuthAccount_ProviderName_ProviderUserID] PRIMARY KEY CLUSTERED ([ProviderName] ASC, [ProviderUserID] ASC), 
-    CONSTRAINT [FK_UserOpenAuthAccount_User] FOREIGN KEY ([UserID]) REFERENCES [Membership].[User]([UserID])
+    CONSTRAINT [PK_UserOpenAuthAccount_ProviderName_ProviderUserID] PRIMARY KEY CLUSTERED ([ProviderName] ASC, [ProviderUserID] ASC),
+    CONSTRAINT [FK_UserOpenAuthAccount_User] FOREIGN KEY ([UserID]) REFERENCES [Membership].[User] ([UserID])
 );
+
 GO
-
-CREATE INDEX [IX_UserOpenAuthAccount_UserID_ProviderName_ProviderID] ON [Membership].[UserOpenAuthAccount] ([UserID] ASC, [ProviderName] ASC, [ProviderUserID] ASC);
-
+CREATE NONCLUSTERED INDEX [IX_UserOpenAuthAccount_UserID_ProviderName_ProviderID]
+    ON [Membership].[UserOpenAuthAccount]([UserID] ASC, [ProviderName] ASC, [ProviderUserID] ASC);

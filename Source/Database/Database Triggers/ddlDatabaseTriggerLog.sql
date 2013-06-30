@@ -46,4 +46,3 @@ END;
 
 GO
 DISABLE TRIGGER [ddlDatabaseTriggerLog] ON DATABASE;
-

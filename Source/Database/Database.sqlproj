@@ -20,7 +20,8 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetLanguage>CS</TargetLanguage>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <SqlServerVerification>True</SqlServerVerification>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -55,46 +56,42 @@
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
-    <Folder Include="Properties" />
+    <Folder Include="Database Triggers\" />
     <Folder Include="dbo\" />
+    <Folder Include="dbo\Stored Procedures\" />
     <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\User Defined Types\" />
     <Folder Include="Membership\" />
     <Folder Include="Membership\Tables\" />
-    <Folder Include="dbo\Stored Procedures\" />
-    <Folder Include="Database Triggers\" />
-    <Folder Include="dbo\User Defined Types\" />
-    <Folder Include="Security\" />
+    <Folder Include="Properties" />
+    <Folder Include="Publish Profiles" />
+    <Folder Include="Reference Data" />
     <Folder Include="Scripts" />
-    <Folder Include="ReferenceData" />
+    <Folder Include="Security\" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\ErrorLog.sql" />
+    <Build Include="Database Triggers\ddlDatabaseTriggerLog.sql" />
+    <Build Include="dbo\Stored Procedures\uspLogError.sql" />
+    <Build Include="dbo\Stored Procedures\uspPrintError.sql" />
     <Build Include="dbo\Tables\DatabaseLog.sql" />
-    <Build Include="Membership\Tables\UserUserRole.sql" />
+    <Build Include="dbo\Tables\ErrorLog.sql" />
+    <Build Include="dbo\User Defined Types\Email.sql" />
+    <Build Include="dbo\User Defined Types\Flag.sql" />
+    <Build Include="dbo\User Defined Types\Name.sql" />
+    <Build Include="dbo\User Defined Types\Phone.sql" />
+    <Build Include="Membership\Tables\AnonymousUser.sql" />
+    <Build Include="Membership\Tables\Profile.sql" />
     <Build Include="Membership\Tables\User.sql" />
     <Build Include="Membership\Tables\UserRole.sql" />
-    <Build Include="dbo\Stored Procedures\uspPrintError.sql" />
-    <Build Include="dbo\Stored Procedures\uspLogError.sql" />
-    <Build Include="Database Triggers\ddlDatabaseTriggerLog.sql" />
-    <Build Include="dbo\User Defined Types\Phone.sql" />
-    <Build Include="dbo\User Defined Types\Name.sql" />
-    <Build Include="dbo\User Defined Types\Flag.sql" />
-    <Build Include="dbo\User Defined Types\Email.sql" />
-    <Build Include="Security\System.sql" />
-    <Build Include="Security\Membership.sql" />
-    <Build Include="Membership\Tables\AnonymousUser.sql" />
     <Build Include="Membership\Tables\UserOpenAuthAccount.sql" />
-    <Build Include="Membership\Tables\Profile.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Local.publish.xml" />
-    <None Include="Test.publish.xml" />
-    <None Include="README.md" />
-    <None Include="ReferenceData\User.sql" />
-    <None Include="ReferenceData\UserRole.sql" />
-    <None Include="ReferenceData\UserUserRole.sql" />
-  </ItemGroup>
-  <ItemGroup>
+    <Build Include="Membership\Tables\UserUserRole.sql" />
+    <None Include="Publish Profiles\Local.publish.xml" />
+    <None Include="Publish Profiles\Production.publish.xml" />
+    <None Include="Publish Profiles\Test.publish.xml" />
+    <None Include="Reference Data\User.sql" />
+    <None Include="Reference Data\UserRole.sql" />
+    <None Include="Reference Data\UserUserRole.sql" />
     <PostDeploy Include="Scripts\PostDeployment.sql" />
+    <Build Include="Security\Membership.sql" />
   </ItemGroup>
 </Project>
