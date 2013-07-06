@@ -93,5 +93,9 @@
     <None Include="Reference Data\UserUserRole.sql" />
     <PostDeploy Include="Scripts\PostDeployment.sql" />
     <Build Include="Security\Membership.sql" />
+    <Build Include="Membership\Tables\UserClaim.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="Database.refactorlog" />
   </ItemGroup>
 </Project>

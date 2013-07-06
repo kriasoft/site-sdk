@@ -6,7 +6,7 @@ angular.module('app.controllers', [])
 
     .controller('LoginCtrl', ['$scope', '$rootScope', '$http', '$state', '$location', ($scope, $rootScope, $http: ng.IHttpService, $state, $location) => {
 
-        console.dir($location.$$search.auth);
+        //console.dir($location.$$search.auth);
 
         $scope.user = {};
         $scope.modelState = $location.$$search.auth == 'failed' ? { '': ['Failed to login via external authentication provider.'] } : {};
@@ -31,7 +31,7 @@ angular.module('app.controllers', [])
         $scope.externalLogin = (provider) => {
             var form = <HTMLFormElement>document.createElement('form');
             form.method = 'POST';
-            form.action = '/api/auth/' + provider;
+            form.action = '/api/externallogin/' + provider;
             document.body.appendChild(form);
             form.submit();
         };

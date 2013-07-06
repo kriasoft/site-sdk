@@ -16,8 +16,9 @@ namespace App.Data
     {
         public User()
         {
-            this.OpenAuthAccounts = new HashSet<UserOpenAuthAccount>();
-            this.UserRoles = new HashSet<UserRole>();
+            this.Claims = new HashSet<UserClaim>();
+            this.Logins = new HashSet<UserLogin>();
+            this.Roles = new HashSet<UserRole>();
         }
     
         public int UserID { get; set; }
@@ -43,7 +44,8 @@ namespace App.Data
         public string Comment { get; set; }
     
         public virtual Profile Profile { get; set; }
-        public virtual ICollection<UserOpenAuthAccount> OpenAuthAccounts { get; set; }
-        public virtual ICollection<UserRole> UserRoles { get; set; }
+        public virtual ICollection<UserClaim> Claims { get; set; }
+        public virtual ICollection<UserLogin> Logins { get; set; }
+        public virtual ICollection<UserRole> Roles { get; set; }
     }
 }

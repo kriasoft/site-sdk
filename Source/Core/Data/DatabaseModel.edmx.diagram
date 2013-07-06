@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e353a5b6ad24430bb760f6a27ad8591f" Name="Membership">
+        <EntityTypeShape EntityType="DatabaseModel.AnonymousUser" Width="1.5" PointX="4.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Profile" Width="1.5" PointX="4.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.User" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.UserClaim" Width="1.5" PointX="4.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.UserLogin" Width="1.5" PointX="2.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.UserRole" Width="1.5" PointX="2.75" PointY="3.5" IsExpanded="true" />
+        <AssociationConnector Association="DatabaseModel.FK_Profile_User" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_UserClaim_User" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_UserLogin_User" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.UserUserRole" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

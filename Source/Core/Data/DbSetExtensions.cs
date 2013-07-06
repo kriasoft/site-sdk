@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DatabaseContextExtensions.cs" company="KriaSoft LLC">
+// <copyright file="DbSetExtensions.cs" company="KriaSoft LLC">
 //   Copyright © 2013 Konstantin Tarkus, KriaSoft LLC. See LICENSE.txt
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -7,13 +7,14 @@
 namespace App.Data
 {
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
+    using System.Threading.Tasks;
 
     using App.Security;
-    using App.Properties;
 
-    public static class DatabaseContextExtensions
+    public static class DbSetExtensions
     {
         public static User Add(this DbSet<User> users, string userName, string email, string password, string displayName)
         {
@@ -34,20 +35,23 @@ namespace App.Data
             });
         }
 
-        public static void CheckUniqueness(this DbSet<User> users, string userName, string email, out bool isUserNameUnique, out bool isEmailUnique)
+        public static async Task<UserNameUniquenessResult> CheckUniqueness(this DbSet<User> users, string userName, string email)
         {
-            var result = users.Where(u => u.UserName == userName || u.Email == email)
-                              .Select(u => new { UserName = u.UserName, Email = u.Email }).ToList();
-            
-            isUserNameUnique = result.Any(u => u.UserName == userName);
-            isEmailUnique = result.Any(u => u.Email == email);
+            var result = await users.Where(u => u.UserName == userName || u.Email == email)
+                                    .Select(u => new { UserName = u.UserName, Email = u.Email }).ToListAsync();
+
+            return new UserNameUniquenessResult
+            {
+                IsUserNameUnique = result.Any(u => u.UserName == userName),
+                IsEmailUnique = result.Any(u => u.Email == email)
+            };
         }
 
-        public static User GetByUserNameOrEmail(this DbSet<User> users, string userNameOrEmail, string password)
+        public static async Task<User> GetByUserNameOrEmailAndPassword(this DbSet<User> users, string userNameOrEmail, string password)
         {
             if (userNameOrEmail.Contains('@'))
             {
-                foreach (var user in users.Where(u => u.Email == userNameOrEmail))
+                foreach (var user in await users.Where(u => u.Email == userNameOrEmail).ToListAsync())
                 {
                     if (PasswordHash.Validate(password, user.PasswordHash, user.PasswordSalt))
                     {
@@ -57,7 +61,7 @@ namespace App.Data
             }
             else
             {
-                var user = users.SingleOrDefault(u => u.UserName == userNameOrEmail);
+                var user = await users.SingleOrDefaultAsync(u => u.UserName == userNameOrEmail);
 
                 if (user != null && PasswordHash.Validate(password, user.PasswordHash, user.PasswordSalt))
                 {
@@ -66,6 +70,17 @@ namespace App.Data
             }
 
             return null;
+        }
+
+        public static async Task<List<UserRole>> GetUserRoles(this DbSet<User> users, int userID)
+        {
+            return await users.Where(u => u.UserID.Equals(userID)).SelectMany(u => u.Roles).ToListAsync();
+        }
+
+        public struct UserNameUniquenessResult
+        {
+            public bool IsUserNameUnique;
+            public bool IsEmailUnique;
         }
     }
 }

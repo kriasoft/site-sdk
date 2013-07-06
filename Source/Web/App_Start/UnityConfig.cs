@@ -9,17 +9,12 @@
 namespace App.Web
 {
     using System;
-    using System.Linq;
     using System.Web.Http;
-    using System.Web.Mvc;
 
-    using App.Data;
     using App.Security;
     using App.Services;
-
     using Microsoft.Practices.Unity;
     using Microsoft.Practices.Unity.WebApi;
-    using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
     /// <summary>Specifies the Unity configuration for the main container.</summary>
     public class UnityConfig
@@ -51,7 +46,7 @@ namespace App.Web
             container.RegisterType<IFormsAuthentication, FormsAuthenticationWrapper>(new ContainerControlledLifetimeManager());
         }
 
-        /// <summary>Provides the bootstrapping for integrating Unity with Web Api when it is hosted in ASP.NET.</summary>
+        /// <summary>Provides the bootstrapping for integrating Unity with Web API when it is hosted in ASP.NET.</summary>
         public static class Activator
         {
             /// <summary>Integrates Unity when the application starts.</summary>

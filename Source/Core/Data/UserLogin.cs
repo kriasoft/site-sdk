@@ -12,16 +12,14 @@ namespace App.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class UserRole
+    public partial class UserLogin
     {
-        public UserRole()
-        {
-            this.Users = new HashSet<User>();
-        }
+        public int UserID { get; set; }
+        public string ProviderName { get; set; }
+        public string ProviderUserID { get; set; }
+        public string ProviderUserName { get; set; }
+        public Nullable<System.DateTime> LastUsedDate { get; set; }
     
-        public byte RoleID { get; set; }
-        public string RoleName { get; set; }
-    
-        public virtual ICollection<User> Users { get; set; }
+        public virtual User User { get; set; }
     }
 }

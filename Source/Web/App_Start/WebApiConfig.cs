@@ -16,10 +16,7 @@ namespace App.Web
     {
         public static void Register(HttpConfiguration config)
         {
-            config.Routes.MapHttpRoute(
-                name: "Auth",
-                routeTemplate: "api/auth/{provider}",
-                defaults: new { controller = "auth" });
+            config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

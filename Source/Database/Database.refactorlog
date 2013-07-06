@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="338d59b9-3c48-43a8-a641-8d6de65b8b56" ChangeDateTime="06/30/2013 23:23:27">
+    <Property Name="ElementName" Value="[Membership].[UserOpenAuthAccount]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[Membership]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[UserLogin]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="85c96d9e-1e92-4c3a-a859-952e26bfbf9b" ChangeDateTime="06/30/2013 23:23:47">
+    <Property Name="ElementName" Value="[Membership].[FK_UserOpenAuthAccount_User]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[Membership].[UserLogin]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_UserLogin_User]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d9caa731-c60f-48e6-87b8-40003044fc17" ChangeDateTime="06/30/2013 23:23:59">
+    <Property Name="ElementName" Value="[Membership].[PK_UserOpenAuthAccount_ProviderName_ProviderUserID]" />
+    <Property Name="ElementType" Value="SqlPrimaryKeyConstraint" />
+    <Property Name="ParentElementName" Value="[Membership].[UserLogin]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[PK_UserLogin_ProviderName_ProviderUserID]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a79e14fa-a631-4f7a-a732-582c63786f53" ChangeDateTime="06/30/2013 23:25:00">
+    <Property Name="ElementName" Value="[Membership].[UserLogin].[IX_UserOpenAuthAccount_UserID_ProviderName_ProviderID]" />
+    <Property Name="ElementType" Value="SqlIndex" />
+    <Property Name="ParentElementName" Value="[Membership].[UserLogin]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[IX_UserLogin_UserID_ProviderName_ProviderID]" />
+  </Operation>
+</Operations>

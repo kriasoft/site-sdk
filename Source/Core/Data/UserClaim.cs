@@ -12,16 +12,13 @@ namespace App.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class UserRole
+    public partial class UserClaim
     {
-        public UserRole()
-        {
-            this.Users = new HashSet<User>();
-        }
+        public System.Guid ClaimID { get; set; }
+        public int UserID { get; set; }
+        public string ClaimType { get; set; }
+        public string ClaimValue { get; set; }
     
-        public byte RoleID { get; set; }
-        public string RoleName { get; set; }
-    
-        public virtual ICollection<User> Users { get; set; }
+        public virtual User User { get; set; }
     }
 }
