@@ -7,7 +7,7 @@ This a solution (project) template of a typical single-page web application buil
  - [ASP.NET Web API](http://www.asp.net/web-api), [ASP.NET Web Pages](http://www.asp.net/web-pages) (Razor)
  - [AngularJS](http://www.angularjs.org) client side framework by Google
  - [SQL Server](http://www.windowsazure.com/en-us/services/data-management/) database project with [SSDT](http://msdn.microsoft.com/en-us/data/tools.aspx)
- - [Entity Framework](http://msdn.microsoft.com/en-us/data/ef.aspx) 5 with [Database First](http://msdn.microsoft.com/en-us/data/jj206878.aspx)
+ - [Entity Framework](http://msdn.microsoft.com/en-us/data/ef.aspx) 6 with [Database First](http://msdn.microsoft.com/en-us/data/jj206878.aspx)
  - Real-time web functionality with [SignalR](http://www.asp.net/signalr)
  - [Enterprise Library 6.0](http://msdn.microsoft.com/en-us/library/ff648951.aspx)
  - [Windows Azure SDK](http://www.windowsazure.com/en-us/develop/net/)
