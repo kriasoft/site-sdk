@@ -14,7 +14,7 @@ namespace App.Web
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/js/jquery").Include(
-                        "~/scripts/jquery-{version}.js"));
+                        "~/scripts/jquery/jquery-{version}.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
