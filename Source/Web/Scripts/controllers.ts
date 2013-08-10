@@ -23,7 +23,7 @@ angular.module('app.controllers', [])
                 })
                 .error((data, status) => {
                     if (status == 400) {
-                        $scope.modelState = data.modelState;
+                        // TODO: Set error message
                     }
                 });
         };

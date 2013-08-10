@@ -1,3 +1,4 @@
+/// <reference path="_references.ts" />
 angular.module('app.controllers', []).controller('HomeCtrl', function () {
 }).controller('LoginCtrl', [
     '$scope',
@@ -6,6 +7,7 @@ angular.module('app.controllers', []).controller('HomeCtrl', function () {
     '$state',
     '$location',
     function ($scope, $rootScope, $http, $state, $location) {
+        //console.dir($location.$$search.auth);
         $scope.user = {};
         $scope.modelState = $location.$$search.auth == 'failed' ? { '': ['Failed to login via external authentication provider.'] } : {};
 
@@ -19,7 +21,7 @@ angular.module('app.controllers', []).controller('HomeCtrl', function () {
                 }
             }).error(function (data, status) {
                 if (status == 400) {
-                    $scope.modelState = data.modelState;
+                    // TODO: Set error message
                 }
             });
         };
@@ -97,3 +99,4 @@ angular.module('app.controllers', []).controller('HomeCtrl', function () {
         };
     }
 ]);
+//# sourceMappingURL=controllers.js.map

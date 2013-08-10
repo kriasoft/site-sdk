@@ -40,3 +40,4 @@ angular.module('app', ['ui.state', 'app.filters', 'app.services', 'app.directive
         });
     }
 ]);
+//# sourceMappingURL=app.js.map

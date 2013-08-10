@@ -283,8 +283,6 @@
     <Content Include="Fonts\fontawesome-webfont.woff" />
     <Content Include="Humans.txt" />
     <Content Include="Robots.txt" />
-    <TypeScriptCompile Include="Scripts\app.ts" />
-    <TypeScriptCompile Include="Scripts\filters.ts" />
     <Content Include="Scripts\angular\angular-cookies.d.ts" />
     <Content Include="Scripts\angular\angular-cookies.js" />
     <Content Include="Scripts\angular\angular-cookies.min.js" />
@@ -595,11 +593,7 @@
     <Content Include="Scripts\angular\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\angular\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\angular\i18n\angular-locale_zu.js" />
-    <Content Include="Scripts\filters.js">
-      <DependentUpon>filters.ts</DependentUpon>
-    </Content>
     <TypeScriptCompile Include="Scripts\jquery\jquery.d.ts" />
-    <TypeScriptCompile Include="Scripts\services.ts" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
     <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Index.cshtml" />
@@ -612,38 +606,51 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
-    <Content Include="Scripts\controllers.min.js.map">
-      <DependentUpon>controllers.js</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\jquery\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery\jquery-2.0.3.min.js" />
     <Content Include="Scripts\jquery\jquery-2.0.3.min.map" />
-    <Content Include="Scripts\services.js">
-      <DependentUpon>services.ts</DependentUpon>
+    <TypeScriptCompile Include="Scripts\_references.ts" />
+    <Content Include="Scripts\_references.js">
+      <DependentUpon>_references.ts</DependentUpon>
     </Content>
-    <Content Include="Scripts\services.min.js">
-      <DependentUpon>services.ts</DependentUpon>
+    <Content Include="Scripts\_references.js.map">
+      <DependentUpon>_references.ts</DependentUpon>
     </Content>
+    <TypeScriptCompile Include="Scripts\app.ts" />
     <Content Include="Scripts\app.js">
       <DependentUpon>app.ts</DependentUpon>
     </Content>
-    <Content Include="Scripts\app.min.js">
+    <Content Include="Scripts\app.js.map">
       <DependentUpon>app.ts</DependentUpon>
     </Content>
     <TypeScriptCompile Include="Scripts\controllers.ts" />
     <Content Include="Scripts\controllers.js">
       <DependentUpon>controllers.ts</DependentUpon>
     </Content>
-    <Content Include="Scripts\controllers.min.js">
+    <Content Include="Scripts\controllers.js.map">
       <DependentUpon>controllers.ts</DependentUpon>
     </Content>
     <TypeScriptCompile Include="Scripts\directives.ts" />
     <Content Include="Scripts\directives.js">
       <DependentUpon>directives.ts</DependentUpon>
     </Content>
-    <Content Include="Scripts\directives.min.js">
+    <Content Include="Scripts\directives.js.map">
       <DependentUpon>directives.ts</DependentUpon>
+    </Content>
+    <TypeScriptCompile Include="Scripts\filters.ts" />
+    <Content Include="Scripts\filters.js">
+      <DependentUpon>filters.ts</DependentUpon>
+    </Content>
+    <Content Include="Scripts\filters.js.map">
+      <DependentUpon>filters.ts</DependentUpon>
+    </Content>
+    <TypeScriptCompile Include="Scripts\services.ts" />
+    <Content Include="Scripts\services.js">
+      <DependentUpon>services.ts</DependentUpon>
+    </Content>
+    <Content Include="Scripts\services.js.map">
+      <DependentUpon>services.ts</DependentUpon>
     </Content>
     <None Include="Startup.cmd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -663,7 +670,6 @@
     <Content Include="Scripts\bootstrap\tooltip.js" />
     <Content Include="Scripts\bootstrap\transition.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <TypeScriptCompile Include="Scripts\_references.ts" />
     <Content Include="Styles\_common.close.less" />
     <Content Include="Styles\_common.component-animations.less" />
     <Content Include="Styles\_common.dropdowns.less" />
